@@ -82,66 +82,32 @@
 }
 
 .meridian-clock {
-  width: clamp(260px, 42vw, 400px);
-  height: clamp(260px, 42vw, 400px);
+  width: clamp(280px, 50vw, 520px);
+  height: clamp(280px, 50vw, 520px);
   margin: 0 auto;
   position: relative;
 }
 
-.meridian-clock svg {
+/* ── Body clock (componente compartido) ── */
+.body-clock-svg {
   width: 100%;
   height: 100%;
   overflow: visible;
+  display: block;
 }
 
-.meridian-clock__sector {
-  fill: none;
-  stroke: rgba(26, 26, 26, 0.12);
-  stroke-width: 0.5;
-  transition: fill var(--t-medium) var(--ease-out-soft);
+.body-clock-seg path {
+  transition: fill-opacity 0.18s ease, stroke-width 0.18s ease;
 }
 
-.meridian-clock__sector.is-current {
-  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+.body-clock-seg:hover path,
+.body-clock-seg.is-active path {
+  fill-opacity: 1;
+  stroke-width: 2.5;
 }
 
-.meridian-clock__sector-divider {
-  stroke: rgba(26, 26, 26, 0.1);
-  stroke-width: 0.5;
-}
-
-.meridian-clock__sector-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  fill: var(--ink-faded);
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-
-.meridian-clock__sector-label.is-current {
-  fill: var(--accent);
-  font-weight: 700;
-}
-
-.meridian-clock__hand {
-  stroke: var(--accent);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  fill: none;
-  /* La aguja la anima anime.js con ease 'inOutQuad' — sin transition CSS para no doblar */
-}
-
-.meridian-clock__center {
-  fill: var(--accent);
-}
-
-.meridian-clock__hour-text {
-  font-family: var(--font-cn);
-  font-size: 24px;
-  fill: var(--ink);
-  text-anchor: middle;
-  dominant-baseline: middle;
+.body-clock-now-dot {
+  filter: drop-shadow(0 0 4px rgba(28, 28, 28, 0.4));
 }
 
 /* Panel info actual */

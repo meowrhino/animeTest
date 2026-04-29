@@ -82,13 +82,101 @@
   max-width: 42ch;
 }
 
+/* ---------- Reloj de meridianos en la home ---------- */
+.portal__clock {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .portal__clock { grid-template-columns: 1fr; }
+}
+
+.portal__clock-host {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.portal__clock-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.portal__clock-when {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.portal__clock-meridian {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.portal__clock-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  color: var(--ink);
+  line-height: 1;
+}
+
+.portal__clock-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  color: var(--ink);
+}
+
+.portal__clock-element {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.portal__clock-advice {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
+  max-width: 38ch;
+}
+
+.portal__clock-cta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  border-bottom: 1px dashed var(--ink-faded);
+  padding-bottom: 1px;
+  width: fit-content;
+  margin-top: 0.4rem;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.portal__clock-cta:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
 .portal__grid {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   width: min(1100px, 100%);
-  perspective: 1200px;
 }
 
 .portal__card {
@@ -97,11 +185,7 @@
 }
 
 .portal__card {
-  /* Variables que portal.js setea según la posición del cursor sobre la card */
-  --tilt-x: 0deg;
-  --tilt-y: 0deg;
-  --hover-y: 0px;
-  transform-style: preserve-3d;
+  position: relative;
 }
 
 .portal__link {
@@ -114,14 +198,12 @@
   background: rgba(255, 252, 245, 0.55);
   border: 1px solid rgba(26, 26, 26, 0.1);
   transition:
-    transform 0.18s var(--ease-out-soft),
+    transform 0.3s var(--ease-out-soft),
     border-color var(--t-medium) var(--ease-out-soft),
     background var(--t-medium) var(--ease-out-soft);
   text-align: left;
   overflow: hidden;
   cursor: pointer;
-  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(var(--hover-y, 0px));
-  transform-origin: center center;
 }
 
 .portal__link::after {
@@ -136,7 +218,7 @@
 }
 
 .portal__link:hover {
-  --hover-y: -3px;
+  transform: translateY(-3px);
   border-color: var(--accent);
   background: rgba(255, 252, 245, 0.85);
 }
@@ -170,8 +252,43 @@
 }
 
 .portal__link:hover .portal__bg-glyph {
-  opacity: 0.9;
   color: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* ---------- Decoración temática por card (esquina sup. derecha) ---------- */
+.portal__deco {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 60px;
+  height: 60px;
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.portal__deco-line {
+  stroke: var(--accent);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  fill: none;
+  opacity: 0.85;
+}
+
+.portal__deco-dot {
+  fill: var(--accent);
+  opacity: 0.9;
+}
+
+.portal__deco-trigram {
+  fill: var(--accent);
+  font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', system-ui;
+  opacity: 0.95;
+}
+
+.portal__deco-hand {
+  stroke-width: 1.8;
+  opacity: 1;
 }
 
 .portal__link:hover .portal__glyph {
