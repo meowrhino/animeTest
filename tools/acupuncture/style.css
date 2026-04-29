@@ -312,6 +312,112 @@
   color: var(--ink-faded);
 }
 
+/* ---------- View toggle (Lista / Mapa) ---------- */
+.acu__view-toggle {
+  display: inline-flex;
+  border: 1px solid var(--ink-faded);
+  margin-bottom: 0.4rem;
+  align-self: flex-start;
+}
+
+.acu__view-btn {
+  padding: 0.5rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  border-right: 1px solid var(--ink-faded);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.acu__view-btn:last-child { border-right: 0; }
+.acu__view-btn[aria-selected="true"] {
+  color: var(--paper);
+  background: var(--ink);
+}
+.acu__view-btn:not([aria-selected="true"]):hover {
+  color: var(--ink);
+}
+
+/* ---------- Body map ---------- */
+.acu__view--map {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .acu__view--map { grid-template-columns: 1fr; }
+}
+
+.acu__map-host {
+  position: sticky;
+  top: 1rem;
+  width: 100%;
+}
+
+.body-map {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  display: block;
+}
+
+.body-map__body-part {
+  fill: rgba(244, 237, 225, 0.7);
+  stroke: var(--ink-faded);
+  stroke-width: 0.6;
+}
+
+.body-map__line {
+  fill: none;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0.55;
+  transition: opacity var(--t-medium) var(--ease-out-soft), stroke-width var(--t-medium);
+}
+
+.body-map__meridian.is-dim .body-map__line {
+  opacity: 0.08;
+}
+
+.body-map__meridian.is-active .body-map__line {
+  opacity: 1;
+  stroke-width: 1.8;
+}
+
+.body-map__point {
+  cursor: pointer;
+  transition: r 0.2s, opacity var(--t-medium);
+}
+
+.body-map__point.is-dim {
+  opacity: 0.12;
+}
+
+.body-map__point.is-active {
+  opacity: 1;
+}
+
+.body-map__point.is-hover,
+.body-map__point:hover {
+  r: 4.5;
+  filter: drop-shadow(0 0 4px var(--accent));
+}
+
+.acu__map-note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  color: var(--ink-faded);
+  font-style: italic;
+  align-self: end;
+}
+
 /* ---------- DETAIL MODAL ---------- */
 .acu__detail {
   position: fixed;

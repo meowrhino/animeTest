@@ -129,7 +129,7 @@
   stroke-width: 1.5;
   stroke-linecap: round;
   fill: none;
-  transition: transform 1s var(--ease-breath); /* aguja con tick suave */
+  /* La aguja la anima anime.js con ease 'inOutQuad' — sin transition CSS para no doblar */
 }
 
 .meridian-clock__center {

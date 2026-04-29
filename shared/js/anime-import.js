@@ -8,4 +8,6 @@ export {
   svg,
   text,
   spring,
+  createDraggable,
+  eases,
 } from 'https://cdn.jsdelivr.net/npm/animejs@4/+esm';

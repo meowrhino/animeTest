@@ -1,4 +1,33 @@
-/* portal.css — landing del proyecto, rejilla de 5 cards */
+/* portal.css — landing del proyecto. Manchas de tinta vivas + cards magnéticas. */
+
+/* ---------- Manchas de tinta flotantes ---------- */
+.ink-field {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ink-blob {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  margin-left: calc(var(--size) * -0.5);
+  margin-top:  calc(var(--size) * -0.5);
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.ink-blob--gold   { background: radial-gradient(circle, rgba(184, 148, 63, 0.34) 0%, transparent 70%); }
+.ink-blob--jade   { background: radial-gradient(circle, rgba(122, 155, 138, 0.28) 0%, transparent 70%); }
+.ink-blob--violet { background: radial-gradient(circle, rgba(91, 74, 122, 0.24)  0%, transparent 70%); }
+.ink-blob--ink    { background: radial-gradient(circle, rgba(26, 26, 26, 0.10)   0%, transparent 70%); }
+
 
 .portal {
   position: relative;
@@ -59,11 +88,20 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   width: min(1100px, 100%);
+  perspective: 1200px;
 }
 
 .portal__card {
   position: relative;
   list-style: none;
+}
+
+.portal__card {
+  /* Variables que portal.js setea según la posición del cursor sobre la card */
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --hover-y: 0px;
+  transform-style: preserve-3d;
 }
 
 .portal__link {
@@ -76,12 +114,14 @@
   background: rgba(255, 252, 245, 0.55);
   border: 1px solid rgba(26, 26, 26, 0.1);
   transition:
-    transform var(--t-medium) var(--ease-out-soft),
+    transform 0.18s var(--ease-out-soft),
     border-color var(--t-medium) var(--ease-out-soft),
     background var(--t-medium) var(--ease-out-soft);
   text-align: left;
   overflow: hidden;
   cursor: pointer;
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(var(--hover-y, 0px));
+  transform-origin: center center;
 }
 
 .portal__link::after {
@@ -96,7 +136,7 @@
 }
 
 .portal__link:hover {
-  transform: translateY(-3px);
+  --hover-y: -3px;
   border-color: var(--accent);
   background: rgba(255, 252, 245, 0.85);
 }
@@ -104,12 +144,34 @@
 .portal__link:hover::after { transform: scaleX(1); }
 
 .portal__glyph {
+  font-family: var(--font-cn);
   font-size: 2.4rem;
   line-height: 1;
   color: var(--accent);
   font-weight: 400;
   margin-bottom: 0.4rem;
-  transition: transform var(--t-medium) var(--ease-out-soft);
+  position: relative;
+  z-index: 2;
+}
+
+/* Glyph grande de fondo: caligrafía gigante apenas visible que respira tras la card */
+.portal__bg-glyph {
+  position: absolute;
+  bottom: -2.5rem;
+  right: -1.4rem;
+  font-family: var(--font-cn);
+  font-size: clamp(9rem, 18vw, 14rem);
+  line-height: 0.8;
+  color: color-mix(in srgb, var(--accent) 18%, transparent);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+  will-change: transform, opacity;
+}
+
+.portal__link:hover .portal__bg-glyph {
+  opacity: 0.9;
+  color: color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .portal__link:hover .portal__glyph {

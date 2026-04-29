@@ -32,6 +32,11 @@
       </header>
 
       <section class="acu__browser">
+        <div class="acu__view-toggle" role="tablist" aria-label="Tipo de vista">
+          <button class="acu__view-btn" data-view="list" aria-selected="true">Lista</button>
+          <button class="acu__view-btn" data-view="map" aria-selected="false">Mapa corporal</button>
+        </div>
+
         <div class="acu__filters">
           <label class="field acu__search-field">
             <span class="field__label">Buscar</span>
@@ -45,9 +50,22 @@
           <!-- Inyectado: 14 botones -->
         </nav>
 
-        <ul class="acu__points-list" id="points-list">
-          <!-- Inyectado -->
-        </ul>
+        <div class="acu__view acu__view--list" data-view="list">
+          <ul class="acu__points-list" id="points-list">
+            <!-- Inyectado -->
+          </ul>
+        </div>
+
+        <div class="acu__view acu__view--map" data-view="map" hidden>
+          <div class="acu__map-host" id="body-map-host">
+            <!-- Inyectado: SVG body map -->
+          </div>
+          <p class="acu__map-note">
+            Vista frontal estilizada. Las líneas son aproximaciones esquemáticas, no
+            mapas anatómicos: para clínica usa una referencia OMS. La vista posterior
+            (Vejiga, Du Mai) está pendiente.
+          </p>
+        </div>
       </section>
 
       <!-- Modal detalle -->

@@ -1,6 +1,7 @@
-// Visor de los 361 puntos canónicos de acupuntura. Filtros por meridiano + búsqueda.
+// Visor de los 361 puntos canónicos de acupuntura. Dos vistas: lista y mapa corporal SVG.
 import { animate, createTimeline, stagger, utils } from '../../../shared/js/anime-import.js';
 import { splitText } from '../../../shared/js/utils.js';
+import { createBodyMap } from './body-map.js';
 
 const state = {
   meridians: [],
@@ -8,6 +9,8 @@ const state = {
   points: [],
   filterMeridian: 'ALL',
   searchQuery: '',
+  view: 'list', // 'list' | 'map'
+  bodyMap: null,
 };
 
 async function loadData() {
@@ -40,6 +43,43 @@ function buildMeridianTabs() {
     state.filterMeridian = tab.dataset.meridian;
     [...host.children].forEach((b) => b.setAttribute('aria-selected', String(b === tab)));
     renderPoints();
+    // Si el mapa está activo, también filtra el mapa
+    if (state.bodyMap) state.bodyMap.setFilter(state.filterMeridian);
+  });
+}
+
+function buildViewToggle() {
+  const buttons = document.querySelectorAll('.acu__view-btn');
+  const views = document.querySelectorAll('.acu__view');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.view;
+      state.view = v;
+      buttons.forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+      views.forEach((vw) => {
+        const match = vw.dataset.view === v;
+        vw.hidden = !match;
+      });
+      // Inicializa el mapa la primera vez que se abre
+      if (v === 'map' && !state.bodyMap) {
+        const host = document.getElementById('body-map-host');
+        state.bodyMap = createBodyMap({
+          host,
+          points: state.points,
+          meridians: state.meridians,
+        });
+        state.bodyMap.play();
+        // Click en un punto del mapa abre el detalle
+        host.addEventListener('click', (e) => {
+          const dot = e.target.closest('.body-map__point');
+          if (dot) showDetail(dot.dataset.code);
+        });
+        // Sincroniza con el filtro activo
+        state.bodyMap.setFilter(state.filterMeridian);
+      } else if (v === 'map' && state.bodyMap) {
+        state.bodyMap.setFilter(state.filterMeridian);
+      }
+    });
   });
 }
 
@@ -184,6 +224,7 @@ function playIntro() {
 async function init() {
   await loadData();
   buildMeridianTabs();
+  buildViewToggle();
   renderPoints();
   bindActions();
   playIntro();

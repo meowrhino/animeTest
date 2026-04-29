@@ -1,7 +1,7 @@
 // main.js — orchestrator del Hexagrama de Nacimiento.
 // Form → cálculo (3 métodos) → reveal animado → lectura desde markdown.
 import { animate, createTimeline, stagger, utils } from '../../../shared/js/anime-import.js';
-import { splitText } from '../../../shared/js/utils.js';
+import { splitText, scrambleText } from '../../../shared/js/utils.js';
 import { compute, METHODS } from './methods/index.js';
 import { initReveal } from './reveal.js';
 import { initReading } from './reading.js';
@@ -98,26 +98,33 @@ function bindForm() {
     state.birth = { year: y, month: mo, day: d, hour: h, minute: mi };
 
     const submitBtn = form.querySelector('button[type="submit"]');
+    const submitLabel = submitBtn.querySelector('span');
     submitBtn.disabled = true;
-    submitBtn.querySelector('span').textContent = 'Calculando…';
+
+    // Scramble durante el cálculo: el botón se descifra como matriz china hasta
+    // que el resultado está listo. Cubre el tiempo de carga de lunar-javascript
+    // y refuerza la sensación de "el oráculo está leyendo tu fecha".
+    const cancelScramble = scrambleText(submitLabel, 'Consultando los pilares…', { duration: 1100 });
 
     try {
       const result = await compute(state.method, state.birth);
       state.result = result;
+      cancelScramble();
 
       if (result.status !== 'ok') {
-        submitBtn.querySelector('span').textContent = result.error || 'Error en el cálculo';
+        submitLabel.textContent = result.error || 'Error en el cálculo';
         submitBtn.disabled = false;
         return;
       }
 
       revealApi.render(result);
       submitBtn.disabled = false;
-      submitBtn.querySelector('span').textContent = 'Calcular mi hexagrama';
+      submitLabel.textContent = 'Calcular mi hexagrama';
       go('reveal');
     } catch (err) {
+      cancelScramble();
       console.error(err);
-      submitBtn.querySelector('span').textContent = `Error: ${err.message}`;
+      submitLabel.textContent = `Error: ${err.message}`;
       submitBtn.disabled = false;
     }
   });

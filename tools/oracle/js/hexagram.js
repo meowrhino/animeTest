@@ -108,14 +108,17 @@ export function initReveal(state) {
       ease: spring({ mass: 1, stiffness: 80, damping: 14 }),
     }, 200);
 
-    // Líneas del primario aparecen con stagger desde abajo (sensación de levitación)
+    // Líneas del primario aparecen con stagger ritual desde abajo. El ease 'steps(6)'
+    // discretiza la entrada en seis tiempos: cada línea se asienta con un beat de
+    // tambor en lugar de una curva continua. Eco de la cuenta de tirada.
     tl.add(primaryLines, {
       translateY: [
         { from: 16, to: 0, duration: 800, ease: 'outExpo' },
       ],
       opacity: [0, 1],
       duration: 800,
-      delay: stagger(80, { from: 'last' }), // bottom-up: but last in DOM = top of hexagram, so use 'last' or reverse
+      delay: stagger(110, { from: 'last' }), // bottom-up: 'last' del DOM = línea inferior real
+      ease: 'steps(6)',
     }, '-=900');
 
     // Meta typewriter en cascada

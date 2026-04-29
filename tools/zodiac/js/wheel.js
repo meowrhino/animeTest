@@ -1,5 +1,6 @@
-// Rueda zodiacal SVG con 12 segmentos (uno por animal). Gira para apuntar al animal del año.
-import { animate, utils } from '../../../shared/js/anime-import.js';
+// Rueda zodiacal SVG con 12 segmentos (uno por animal). Gira para apuntar al animal del año
+// y se puede arrastrar manualmente (snap a 30°) para consultar el animal del momento.
+import { animate, utils, spring } from '../../../shared/js/anime-import.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -103,20 +104,114 @@ export function createZodiacWheel({ host, animals }) {
     const idx = animals.findIndex((a) => a.key === animalKey);
     if (idx < 0) return;
 
-    // Para que el segmento del animal quede arriba, rotamos -idx*segDeg
-    // + ~3 vueltas completas para sensación cinemática
+    // 3 vueltas completas + posición final para que el segmento quede arriba
     const finalRotation = -idx * segDeg - 3 * 360;
 
     utils.set(svg, { rotate: 0 });
+    currentRotation = 0;
 
+    // Dos fases: primer giro rápido (outQuad) hasta cerca del destino,
+    // luego asentamiento con spring (rebote sutil) para que se sienta como una rueda real.
     await animate(svg, {
-      rotate: [0, finalRotation],
-      duration: 2400,
-      ease: 'outExpo',
+      rotate: [0, finalRotation - 12], // overshoot intencional
+      duration: 2200,
+      ease: 'outQuad',
     });
+    await animate(svg, {
+      rotate: finalRotation,
+      duration: 600,
+      ease: spring({ mass: 1, stiffness: 80, damping: 8 }),
+    });
+    currentRotation = finalRotation;
 
     highlight(animalKey);
   }
 
-  return { svg, highlight, spinTo };
+  // ── Drag manual: arrastra la rueda con momentum y snap al animal más cercano ──
+  let isDragging = false;
+  let dragStartAngle = 0;
+  let dragStartRotation = 0;
+  let currentRotation = 0;
+  let dragVelocity = 0;
+  let lastDragAngle = 0;
+  let lastDragTime = 0;
+  let onSnapCallback = null;
+
+  function pointerAngle(clientX, clientY) {
+    const rect = svg.getBoundingClientRect();
+    const cxAbs = rect.left + rect.width / 2;
+    const cyAbs = rect.top + rect.height / 2;
+    return Math.atan2(clientY - cyAbs, clientX - cxAbs) * 180 / Math.PI;
+  }
+
+  svg.style.cursor = 'grab';
+  svg.style.touchAction = 'none';
+
+  svg.addEventListener('pointerdown', (e) => {
+    isDragging = true;
+    svg.setPointerCapture(e.pointerId);
+    svg.style.cursor = 'grabbing';
+    dragStartAngle = pointerAngle(e.clientX, e.clientY);
+    dragStartRotation = currentRotation;
+    lastDragAngle = dragStartAngle;
+    lastDragTime = performance.now();
+    dragVelocity = 0;
+  });
+
+  svg.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const ang = pointerAngle(e.clientX, e.clientY);
+    let delta = ang - dragStartAngle;
+    // Normalizar entre -180 y 180 para evitar saltos al cruzar
+    if (delta > 180) delta -= 360;
+    if (delta < -180) delta += 360;
+    currentRotation = dragStartRotation + delta;
+    utils.set(svg, { rotate: currentRotation });
+
+    // Estimar velocidad para inercia
+    const now = performance.now();
+    const dt = now - lastDragTime;
+    if (dt > 0) {
+      let frame = ang - lastDragAngle;
+      if (frame > 180) frame -= 360;
+      if (frame < -180) frame += 360;
+      dragVelocity = frame / dt; // grados / ms
+    }
+    lastDragAngle = ang;
+    lastDragTime = now;
+  });
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+    svg.style.cursor = 'grab';
+
+    // Inercia suave + snap al múltiplo de 30° más cercano
+    const inertia = dragVelocity * 240; // un par de centésimas de inercia
+    const target = currentRotation + inertia;
+    const snapped = Math.round(target / segDeg) * segDeg;
+
+    animate(svg, {
+      rotate: snapped,
+      duration: 700,
+      ease: spring({ mass: 1, stiffness: 70, damping: 9 }),
+      onComplete: () => {
+        currentRotation = snapped;
+        // Determinar qué animal queda arriba (índice 0 = Rata, arriba)
+        const stepsFromZero = ((-Math.round(snapped / segDeg)) % 12 + 12) % 12;
+        const animal = animals[stepsFromZero];
+        if (animal) {
+          highlight(animal.key);
+          if (onSnapCallback) onSnapCallback(animal);
+        }
+      },
+    });
+  }
+
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+
+  function onDragSnap(cb) { onSnapCallback = cb; }
+
+  return { svg, highlight, spinTo, onDragSnap };
 }

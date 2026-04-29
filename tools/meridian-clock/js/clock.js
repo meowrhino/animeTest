@@ -127,22 +127,50 @@ export function createMeridianClock({ host, meridians }) {
 
   // ── API pública ──
   let currentCode = null;
+  let pulseAnim = null; // animación viva del sector activo (loop)
+  let firstSet = true;
+
+  // transformOrigin se setea una sola vez (no cambia entre ticks)
+  utils.set(hand, { transformOrigin: `${CX}px ${CY}px`, rotate: 0 });
 
   function setHour(hour) {
-    // Aguja: rota la línea desde 0
     const angleDeg = (hour / 24) * 360;
-    utils.set(hand, { transformOrigin: `${CX}px ${CY}px`, rotate: angleDeg });
+
+    // Primera llamada: posiciona instantáneamente para no animar desde 0.
+    // Llamadas siguientes (cada 30s): aguja se desliza con easing breathing.
+    if (firstSet) {
+      utils.set(hand, { rotate: angleDeg });
+      firstSet = false;
+    } else {
+      animate(hand, {
+        rotate: angleDeg,
+        duration: 1000,
+        ease: 'inOutQuad',
+      });
+    }
 
     // Resaltar meridiano activo
     const m = meridianForHour(Math.floor(hour), meridians);
     if (m && m.code !== currentCode) {
-      // Quitar highlight previo
+      // Limpiar highlight previo y matar pulse anterior
       Object.values(sectors).forEach((s) => s.classList.remove('is-current'));
       svg.querySelectorAll('.meridian-clock__sector-label').forEach((l) => l.classList.remove('is-current'));
-      // Añadir nuevo
+      if (pulseAnim) pulseAnim.pause();
+
+      // Aplicar al nuevo
       sectors[m.code].classList.add('is-current');
       svg.querySelector(`[data-meridian-label="${m.code}"]`)?.classList.add('is-current');
       currentCode = m.code;
+
+      // Pulse respiratorio del sector activo (~6s ciclo, sutil opacity de fill-opacity)
+      pulseAnim = animate(sectors[m.code], {
+        fillOpacity: [
+          { to: 1,   duration: 3000 },
+          { to: 0.55, duration: 3000 },
+        ],
+        loop: true,
+        ease: 'inOutSine',
+      });
     }
     return m;
   }
