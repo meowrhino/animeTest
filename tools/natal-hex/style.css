@@ -1,0 +1,392 @@
+/* tools/natal-hex/style.css — Hexagrama de Nacimiento */
+
+.natal {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+}
+
+.back-link {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 10;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  transition: color var(--t-fast);
+}
+.back-link:hover { color: var(--accent); }
+
+.natal-section {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--t-slow) var(--ease-breath),
+              visibility 0s linear var(--t-slow);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.natal-section.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity var(--t-slow) var(--ease-breath),
+              visibility 0s linear 0s;
+  z-index: 3;
+}
+
+.natal-section--scroll.is-active {
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ---------- INTRO + FORM ---------- */
+.natal__content {
+  width: min(640px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.natal__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+.natal__title-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.natal__title-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.natal__subtitle {
+  font-style: italic;
+  color: var(--ink-faded);
+  max-width: 42ch;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+.natal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  text-align: left;
+}
+
+.natal__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+@media (max-width: 480px) {
+  .natal__form-grid { grid-template-columns: 1fr; }
+}
+
+.natal__form-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+.natal__form-checkbox input[type="checkbox"] {
+  appearance: auto;
+  accent-color: var(--accent);
+}
+
+.natal__methods {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.natal__method-hint {
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  min-height: 2em;
+}
+
+/* ---------- REVEAL ---------- */
+.natal__reveal {
+  position: relative;
+  width: min(900px, 95vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.reveal__halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 70vmin; height: 70vmin;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent) 0%, transparent 60%);
+  filter: blur(20px);
+  z-index: 0;
+  opacity: 0;
+}
+
+.reveal__hexagrams {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.reveal__hexagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.reveal__caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.reveal__arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faded);
+}
+
+.reveal__arrow svg {
+  width: 80px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.reveal__meta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.reveal__number {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.reveal__name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 400;
+}
+
+.reveal__name-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.reveal__name-py {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+.reveal__meaning {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--ink);
+  margin-top: 0.4rem;
+}
+
+.reveal__trigrams {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+.reveal__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Hexagram size in reveal */
+.reveal__hexagram-svg .hexagram { gap: 12px; }
+.reveal__hexagram-svg .hexagram__line { height: 36px; }
+.reveal__hexagram-svg .iching-line { width: 280px; height: 36px; }
+.reveal__hexagram-svg .iching-line .line-segment { stroke-width: 14; }
+
+/* ---------- READING ---------- */
+.reading__article {
+  max-width: var(--max-readable);
+  margin: clamp(3rem, 8vh, 6rem) auto;
+  padding: 0 clamp(1rem, 4vw, 2rem) 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.reading__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.reading__breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+.reading__breadcrumb a { color: var(--ink-faded); }
+.reading__breadcrumb a:hover { color: var(--accent); }
+
+.reading__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-weight: 400;
+}
+
+.reading__title #reading-name-cn {
+  font-family: var(--font-cn);
+  font-size: 2.4rem;
+}
+
+.reading__title small {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+}
+
+.reading__title em {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 0.4rem;
+}
+
+.reading__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.reading__body h1 { display: none; } /* el título ya lo pintamos arriba */
+
+.reading__body h2 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-top: 1.5rem;
+  font-weight: 500;
+}
+
+.reading__body h3 {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.reading__body p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.reading__body strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.reading__body em {
+  color: var(--accent);
+}
+
+.reading__body hr {
+  border: 0;
+  height: 1px;
+  background: rgba(26, 26, 26, 0.1);
+  margin: 1.5rem 0;
+}
+
+.reading__loading {
+  font-style: italic;
+  color: var(--ink-faded);
+  text-align: center;
+}
+
+.reading__footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}

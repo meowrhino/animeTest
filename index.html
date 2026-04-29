@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>易 — Suite de adivinación</title>
+    <meta name="description" content="Cinco herramientas para consultar al I-Ching, calcular tu hexagrama natal, descubrir tu animal del horóscopo chino y leer tu carta natal con casas de signo entero." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./shared/styles/tokens.css" />
+    <link rel="stylesheet" href="./shared/styles/base.css" />
+    <link rel="stylesheet" href="./shared/styles/components.css" />
+    <link rel="stylesheet" href="./portal.css" />
+  </head>
+  <body data-tool="portal">
+    <div class="grain" aria-hidden="true"></div>
+
+    <main class="portal">
+      <header class="portal__header">
+        <h1 class="portal__title">
+          <span class="portal__title-cn" aria-hidden="true">易</span>
+          <span class="portal__title-text">Suite de adivinación</span>
+        </h1>
+        <p class="portal__subtitle"><span data-split>Cinco maneras de consultar lo que el cambio aún no ha dicho.</span></p>
+      </header>
+
+      <ul class="portal__grid">
+        <li class="portal__card" style="--accent: var(--gold); --accent-soft: var(--gold-soft);">
+          <a href="./tools/oracle/" class="portal__link">
+            <span class="portal__glyph" aria-hidden="true">☯</span>
+            <span class="portal__name">Oráculo del I-Ching</span>
+            <span class="portal__desc">Lanza una pregunta al Libro de los Cambios. Monedas o varitas, tú eliges.</span>
+            <span class="portal__cn" aria-hidden="true">易經</span>
+          </a>
+        </li>
+
+        <li class="portal__card" style="--accent: var(--jade); --accent-soft: var(--jade-deep);">
+          <a href="./tools/natal-hex/" class="portal__link">
+            <span class="portal__glyph" aria-hidden="true">卦</span>
+            <span class="portal__name">Hexagrama de Nacimiento</span>
+            <span class="portal__desc">Tu hexagrama natal calculado por tres métodos: Jīng Fáng, numerología y BaZi.</span>
+            <span class="portal__cn" aria-hidden="true">命卦</span>
+          </a>
+        </li>
+
+        <li class="portal__card" style="--accent: var(--indigo); --accent-soft: #4a5878;">
+          <a href="./tools/pakua/" class="portal__link">
+            <span class="portal__glyph" aria-hidden="true">☰</span>
+            <span class="portal__name">Pakua interactivo</span>
+            <span class="portal__desc">Dos prismas octagonales 3D con los Bagua de Fu Xi y el Rey Wen. Rota y deja que se alineen.</span>
+            <span class="portal__cn" aria-hidden="true">八卦</span>
+          </a>
+        </li>
+
+        <li class="portal__card" style="--accent: var(--crimson); --accent-soft: #b35546;">
+          <a href="./tools/zodiac/" class="portal__link">
+            <span class="portal__glyph" aria-hidden="true">龍</span>
+            <span class="portal__name">Horóscopo chino</span>
+            <span class="portal__desc">Tu animal, elemento y los cuatro pilares según fecha y hora de nacimiento.</span>
+            <span class="portal__cn" aria-hidden="true">生肖</span>
+          </a>
+        </li>
+
+        <li class="portal__card" style="--accent: var(--violet); --accent-soft: #8576a4;">
+          <a href="./tools/natal-chart/" class="portal__link">
+            <span class="portal__glyph" aria-hidden="true">⌘</span>
+            <span class="portal__name">Carta natal</span>
+            <span class="portal__desc">Tu carta astral con sistema de casas de signo entero (whole sign houses).</span>
+            <span class="portal__cn" aria-hidden="true">星盤</span>
+          </a>
+        </li>
+      </ul>
+
+      <footer class="portal__footer">
+        <p class="portal__credits">
+          Construido con anime.js · texto en español · <a href="https://github.com/manu" target="_blank" rel="noopener">repositorio</a>
+        </p>
+      </footer>
+    </main>
+
+    <script type="module" src="./portal.js"></script>
+  </body>
+</html>

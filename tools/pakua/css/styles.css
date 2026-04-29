@@ -1,0 +1,217 @@
+:root {
+  --bg-color: #0b0c1b;
+  --bg-panel: #0f1029;
+  --text-color: #e8e1d5;
+  --text-muted: #8a8577;
+  --accent-color: #d4af37;
+  --accent-glow: rgba(212, 175, 55, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100dvh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #141638 0%, #0b0c1b 60%, #06060f 100%);
+  color: var(--text-color);
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle stars background */
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ---- Canvas 3D ---- */
+#canvas-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  touch-action: none;
+}
+
+#canvas-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Panel resultado (bottom sheet) ---- */
+#result-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: linear-gradient(to top, var(--bg-panel) 85%, transparent);
+  padding: 2rem 1.5rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  transform: translateY(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 55vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+#result-panel.visible {
+  transform: translateY(0);
+}
+
+/* ---- Hexagrama display ---- */
+.hex-header {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.hex-number {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hex-name-chinese {
+  font-size: 2.2rem;
+  color: var(--accent-color);
+  margin: 0.3rem 0;
+  line-height: 1.2;
+}
+
+.hex-name-pinyin {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.hex-name-english {
+  font-size: 1.1rem;
+  margin-top: 0.2rem;
+}
+
+/* ---- Líneas del hexagrama ---- */
+.hex-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 1.5rem auto;
+  width: fit-content;
+}
+
+.hex-line {
+  display: flex;
+  gap: 12px;
+  height: 8px;
+}
+
+.hex-line.yang {
+  width: 120px;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+.hex-line.yin {
+  width: 120px;
+  justify-content: space-between;
+}
+
+.hex-line.yin::before,
+.hex-line.yin::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 100%;
+  background: var(--accent-color);
+  border-radius: 2px;
+}
+
+/* ---- Trigramas componentes ---- */
+.hex-trigrams {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.hex-trigram-info {
+  text-align: center;
+}
+
+.hex-trigram-info .symbol {
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.hex-trigram-info .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+
+
+
+/* ---- Loading ---- */
+#loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  transition: opacity 0.6s;
+}
+
+#loading.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 768px) {
+  #result-panel {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  #result-panel.visible {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ---- Suite navigation back link ---- */
+.suite-back-link {
+  position: fixed;
+  top: 1.2rem;
+  left: 1.2rem;
+  z-index: 100;
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  background: rgba(11, 12, 27, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  transition: color 0.2s, border-color 0.2s;
+}
+.suite-back-link:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}

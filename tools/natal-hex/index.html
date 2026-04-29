@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>命卦 — Hexagrama de nacimiento</title>
+    <meta name="description" content="Calcula tu hexagrama natal a partir de tu fecha y hora de nacimiento. Tres métodos disponibles: Jīng Fáng, numerología y BaZi." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../shared/styles/tokens.css" />
+    <link rel="stylesheet" href="../../shared/styles/base.css" />
+    <link rel="stylesheet" href="../../shared/styles/components.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-tool="natal-hex">
+    <div class="grain" aria-hidden="true"></div>
+
+    <a href="../../" class="back-link" aria-label="Volver al portal">← Suite</a>
+
+    <main class="natal">
+      <!-- 1. INTRO + FORM -->
+      <section id="intro" class="natal-section is-active" data-section="intro">
+        <div class="natal__content">
+          <header class="natal__header">
+            <h1 class="natal__title">
+              <span class="natal__title-cn" aria-hidden="true">命卦</span>
+              <span class="natal__title-text">Hexagrama de nacimiento</span>
+            </h1>
+            <p class="natal__subtitle"><span data-split>El hexagrama que se dibuja en el momento exacto de tu primer respiro.</span></p>
+          </header>
+
+          <form class="natal__form" id="natal-form">
+            <div class="natal__form-grid">
+              <label class="field">
+                <span class="field__label">Fecha</span>
+                <input class="field__input" type="date" id="birth-date" required value="1990-01-01" />
+              </label>
+              <label class="field">
+                <span class="field__label">Hora</span>
+                <input class="field__input" type="time" id="birth-time" value="12:00" />
+              </label>
+            </div>
+
+            <label class="field natal__form-checkbox">
+              <input type="checkbox" id="unknown-time" />
+              <span>No conozco la hora exacta (se usa mediodía)</span>
+            </label>
+
+            <fieldset class="natal__methods">
+              <legend class="field__label">Método de cálculo</legend>
+              <div class="tabs" role="tablist" id="method-tabs">
+                <button type="button" class="tabs__btn" role="tab" data-method="jingFang"  aria-selected="true">Jīng Fáng</button>
+                <button type="button" class="tabs__btn" role="tab" data-method="numerology" aria-selected="false">Numerología</button>
+                <button type="button" class="tabs__btn" role="tab" data-method="bazi" aria-selected="false">BaZi</button>
+              </div>
+              <p class="natal__method-hint" id="method-hint"></p>
+            </fieldset>
+
+            <button class="btn btn--primary" type="submit">
+              <span>Calcular mi hexagrama</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 2. REVEAL -->
+      <section id="reveal" class="natal-section" data-section="reveal">
+        <div class="natal__reveal">
+          <div class="reveal__halo" aria-hidden="true"></div>
+
+          <div class="reveal__hexagrams">
+            <figure class="reveal__hexagram" id="natal-primary">
+              <div class="reveal__hexagram-svg" data-role="natal-hexagram"></div>
+              <figcaption class="reveal__caption">Natal</figcaption>
+            </figure>
+            <div class="reveal__arrow" id="natal-arrow" hidden>
+              <svg viewBox="0 0 80 24" aria-hidden="true">
+                <line x1="4" y1="12" x2="68" y2="12" />
+                <polyline points="62,5 76,12 62,19" fill="none" />
+              </svg>
+              <span>tiendes hacia</span>
+            </div>
+            <figure class="reveal__hexagram" id="natal-derived" hidden>
+              <div class="reveal__hexagram-svg" data-role="derived-hexagram"></div>
+              <figcaption class="reveal__caption">Derivado</figcaption>
+            </figure>
+          </div>
+
+          <div class="reveal__meta">
+            <p class="reveal__number" id="natal-number">—</p>
+            <h2 class="reveal__name">
+              <span id="natal-name-cn" class="reveal__name-cn"></span>
+              <span id="natal-name-py" class="reveal__name-py"></span>
+            </h2>
+            <p class="reveal__meaning" id="natal-meaning"></p>
+            <p class="reveal__trigrams" id="natal-trigrams"></p>
+          </div>
+
+          <div class="reveal__actions">
+            <button class="btn btn--ghost" data-action="goto" data-target="intro">Recalcular</button>
+            <button class="btn btn--primary" data-action="goto" data-target="reading">Leer interpretación</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. READING -->
+      <section id="reading" class="natal-section natal-section--scroll" data-section="reading">
+        <article class="reading__article">
+          <header class="reading__header">
+            <p class="reading__breadcrumb"><a href="#" data-action="goto" data-target="reveal">← Volver al hexagrama</a></p>
+            <h2 class="reading__title">
+              <span id="reading-name-cn"></span>
+              <small id="reading-name-py"></small>
+              <em id="reading-meaning"></em>
+            </h2>
+          </header>
+          <div class="reading__body" id="reading-body">
+            <p class="reading__loading">Cargando interpretación…</p>
+          </div>
+          <footer class="reading__footer">
+            <button class="btn btn--ghost" data-action="goto" data-target="intro">Calcular otro</button>
+          </footer>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

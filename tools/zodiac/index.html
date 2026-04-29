@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>生肖 — Horóscopo chino</title>
+    <meta name="description" content="Tu animal y elemento según el horóscopo chino, calculados a partir de fecha y hora de nacimiento." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../shared/styles/tokens.css" />
+    <link rel="stylesheet" href="../../shared/styles/base.css" />
+    <link rel="stylesheet" href="../../shared/styles/components.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-tool="zodiac">
+    <div class="grain" aria-hidden="true"></div>
+    <a href="../../" class="back-link" aria-label="Volver al portal">← Suite</a>
+
+    <main class="zodiac">
+      <!-- 1. INTRO + FORM -->
+      <section id="intro" class="zodiac-section is-active" data-section="intro">
+        <div class="zodiac__content">
+          <header class="zodiac__header">
+            <h1 class="zodiac__title">
+              <span class="zodiac__title-cn" aria-hidden="true">生肖</span>
+              <span class="zodiac__title-text">Horóscopo chino</span>
+            </h1>
+            <p class="zodiac__subtitle"><span data-split>Doce animales, cinco elementos. El círculo completo de tu nacimiento.</span></p>
+          </header>
+
+          <div class="zodiac__wheel-host" id="wheel-host">
+            <!-- Inyectado: SVG de la rueda zodiacal -->
+          </div>
+
+          <form class="zodiac__form" id="zodiac-form">
+            <div class="zodiac__form-grid">
+              <label class="field">
+                <span class="field__label">Fecha</span>
+                <input class="field__input" type="date" id="birth-date" required value="1990-01-01" />
+              </label>
+              <label class="field">
+                <span class="field__label">Hora (opcional)</span>
+                <input class="field__input" type="time" id="birth-time" value="12:00" />
+              </label>
+            </div>
+            <button class="btn btn--primary" type="submit">
+              <span>Consultar mi animal</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 2. REVEAL -->
+      <section id="reveal" class="zodiac-section" data-section="reveal">
+        <div class="zodiac__reveal">
+          <p class="zodiac__caption" id="reveal-caption">Tu signo del año</p>
+          <div class="zodiac__animal-big" id="animal-big">
+            <span class="zodiac__animal-emoji" id="animal-emoji"></span>
+            <span class="zodiac__animal-cn" id="animal-cn"></span>
+          </div>
+          <h2 class="zodiac__animal-name" id="animal-name"></h2>
+          <p class="zodiac__animal-element" id="animal-element"></p>
+
+          <div class="zodiac__pillars">
+            <h3 class="zodiac__pillars-title">Los cuatro pilares</h3>
+            <div class="zodiac__pillars-grid" id="pillars-grid">
+              <!-- Inyectado -->
+            </div>
+          </div>
+
+          <div class="zodiac__personality">
+            <h3 class="zodiac__block-title">Tu naturaleza</h3>
+            <p id="personality-text"></p>
+          </div>
+
+          <div class="zodiac__compat">
+            <h3 class="zodiac__block-title">Animales afines</h3>
+            <p id="compat-text"></p>
+          </div>
+
+          <div class="zodiac__actions">
+            <button class="btn btn--ghost" data-action="goto" data-target="intro">Consultar otro</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

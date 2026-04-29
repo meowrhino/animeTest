@@ -1,0 +1,48 @@
+{
+  "signs": [
+    { "key": "aries",       "spanish": "Aries",       "glyph": "♈", "ruler": "Mars",    "element": "Fire",  "modality": "Cardinal" },
+    { "key": "taurus",      "spanish": "Tauro",       "glyph": "♉", "ruler": "Venus",   "element": "Earth", "modality": "Fixed" },
+    { "key": "gemini",      "spanish": "Géminis",     "glyph": "♊", "ruler": "Mercury", "element": "Air",   "modality": "Mutable" },
+    { "key": "cancer",      "spanish": "Cáncer",      "glyph": "♋", "ruler": "Moon",    "element": "Water", "modality": "Cardinal" },
+    { "key": "leo",         "spanish": "Leo",         "glyph": "♌", "ruler": "Sun",     "element": "Fire",  "modality": "Fixed" },
+    { "key": "virgo",       "spanish": "Virgo",       "glyph": "♍", "ruler": "Mercury", "element": "Earth", "modality": "Mutable" },
+    { "key": "libra",       "spanish": "Libra",       "glyph": "♎", "ruler": "Venus",   "element": "Air",   "modality": "Cardinal" },
+    { "key": "scorpio",     "spanish": "Escorpio",    "glyph": "♏", "ruler": "Mars",    "element": "Water", "modality": "Fixed" },
+    { "key": "sagittarius", "spanish": "Sagitario",   "glyph": "♐", "ruler": "Jupiter", "element": "Fire",  "modality": "Mutable" },
+    { "key": "capricorn",   "spanish": "Capricornio", "glyph": "♑", "ruler": "Saturn",  "element": "Earth", "modality": "Cardinal" },
+    { "key": "aquarius",    "spanish": "Acuario",     "glyph": "♒", "ruler": "Saturn",  "element": "Air",   "modality": "Fixed" },
+    { "key": "pisces",      "spanish": "Piscis",      "glyph": "♓", "ruler": "Jupiter", "element": "Water", "modality": "Mutable" }
+  ],
+  "planets": [
+    { "key": "Sun",     "spanish": "Sol",      "glyph": "☉" },
+    { "key": "Moon",    "spanish": "Luna",     "glyph": "☽" },
+    { "key": "Mercury", "spanish": "Mercurio", "glyph": "☿" },
+    { "key": "Venus",   "spanish": "Venus",    "glyph": "♀" },
+    { "key": "Mars",    "spanish": "Marte",    "glyph": "♂" },
+    { "key": "Jupiter", "spanish": "Júpiter",  "glyph": "♃" },
+    { "key": "Saturn",  "spanish": "Saturno",  "glyph": "♄" },
+    { "key": "Uranus",  "spanish": "Urano",    "glyph": "♅" },
+    { "key": "Neptune", "spanish": "Neptuno",  "glyph": "♆" },
+    { "key": "Pluto",   "spanish": "Plutón",   "glyph": "♇" }
+  ],
+  "houses": [
+    "La identidad y el cuerpo. Cómo te muestras al mundo.",
+    "Los recursos propios, valores, lo que sustenta.",
+    "Comunicación, hermanos, entorno cercano, mente cotidiana.",
+    "Hogar, raíces, familia de origen, mundo interno.",
+    "Creatividad, hijos, juego, lo que se proyecta hacia fuera por placer.",
+    "Salud, rutina, trabajo diario, servicio.",
+    "Pareja, contratos, otros significativos, espejo.",
+    "Lo compartido, transformaciones profundas, herencias, sexualidad.",
+    "Filosofía, viajes largos, expansión, sentido.",
+    "Carrera, vocación pública, autoridad, lo que ven los otros.",
+    "Comunidad, amistades, ideales colectivos, futuro.",
+    "Lo oculto, espiritualidad, retiro, autosabotaje, pérdidas voluntarias."
+  ],
+  "aspects": {
+    "sextile":     { "spanish": "sextil",     "angle": 60,  "color": "var(--jade)",     "harmony": "armónico" },
+    "square":      { "spanish": "cuadratura", "angle": 90,  "color": "var(--crimson)",  "harmony": "tenso" },
+    "trine":       { "spanish": "trígono",    "angle": 120, "color": "var(--accent)",   "harmony": "armónico" },
+    "opposition":  { "spanish": "oposición",  "angle": 180, "color": "var(--ink-soft)", "harmony": "polar" }
+  }
+}

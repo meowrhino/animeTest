@@ -1,0 +1,35 @@
+{
+  "animals": [
+    { "key": "rat",     "branch": "子", "branchPinyin": "Zǐ",   "name": "Rata",      "chinese": "鼠", "emoji": "🐀", "hours": "23:00–01:00", "personality": "Aguda, ingeniosa, observadora. Encuentra el atajo en cada laberinto. Cuando se siente acorralada, prefiere la astucia al choque frontal.", "compatibility": ["dragon", "monkey"], "element_natural": "Water" },
+    { "key": "ox",      "branch": "丑", "branchPinyin": "Chǒu", "name": "Buey",      "chinese": "牛", "emoji": "🐂", "hours": "01:00–03:00", "personality": "Persistente, paciente, fiable. La fuerza tranquila. Construye lentamente lo que no se desmorona. Su silencio puede confundirse con frialdad.", "compatibility": ["snake", "rooster"], "element_natural": "Earth" },
+    { "key": "tiger",   "branch": "寅", "branchPinyin": "Yín",  "name": "Tigre",     "chinese": "虎", "emoji": "🐅", "hours": "03:00–05:00", "personality": "Valiente, magnético, impulsivo. La presencia que llena la habitación. Lucha por causas, a veces sin medir el coste personal.", "compatibility": ["horse", "dog"], "element_natural": "Wood" },
+    { "key": "rabbit",  "branch": "卯", "branchPinyin": "Mǎo",  "name": "Conejo",    "chinese": "兔", "emoji": "🐇", "hours": "05:00–07:00", "personality": "Sensible, diplomática, refinada. Detecta tensiones antes de que se nombren. Prefiere la armonía a la victoria.", "compatibility": ["sheep", "pig"], "element_natural": "Wood" },
+    { "key": "dragon",  "branch": "辰", "branchPinyin": "Chén", "name": "Dragón",    "chinese": "龍", "emoji": "🐉", "hours": "07:00–09:00", "personality": "Carismático, ambicioso, generoso. El que respira fuego sin pedir permiso. Su ímpetu inspira pero a veces atropella.", "compatibility": ["monkey", "rat"], "element_natural": "Earth" },
+    { "key": "snake",   "branch": "巳", "branchPinyin": "Sì",   "name": "Serpiente", "chinese": "蛇", "emoji": "🐍", "hours": "09:00–11:00", "personality": "Intuitiva, profunda, enigmática. Avanza sin ruido y golpea con precisión. Sus motivos rara vez son visibles a primera vista.", "compatibility": ["rooster", "ox"], "element_natural": "Fire" },
+    { "key": "horse",   "branch": "午", "branchPinyin": "Wǔ",   "name": "Caballo",   "chinese": "馬", "emoji": "🐎", "hours": "11:00–13:00", "personality": "Libre, enérgico, espontáneo. No le pidas que se quede quieto. Su entusiasmo es contagioso pero su atención, voluble.", "compatibility": ["dog", "tiger"], "element_natural": "Fire" },
+    { "key": "sheep",   "branch": "未", "branchPinyin": "Wèi",  "name": "Cabra",     "chinese": "羊", "emoji": "🐑", "hours": "13:00–15:00", "personality": "Tierna, artística, melancólica. Sueña en colores cuando el resto duerme. Necesita ternura para florecer y tiempo a solas para sostener a otros.", "compatibility": ["pig", "rabbit"], "element_natural": "Earth" },
+    { "key": "monkey",  "branch": "申", "branchPinyin": "Shēn", "name": "Mono",      "chinese": "猴", "emoji": "🐒", "hours": "15:00–17:00", "personality": "Inventiva, juguetona, irreverente. Resuelve problemas que otros no han visto todavía. Si se aburre, puede generar el siguiente caos.", "compatibility": ["rat", "dragon"], "element_natural": "Metal" },
+    { "key": "rooster", "branch": "酉", "branchPinyin": "Yǒu",  "name": "Gallo",     "chinese": "雞", "emoji": "🐓", "hours": "17:00–19:00", "personality": "Honesta, observadora, exigente. Anuncia el amanecer aunque nadie le pida que lo haga. Su crítica nace de un alto estándar interno.", "compatibility": ["ox", "snake"], "element_natural": "Metal" },
+    { "key": "dog",     "branch": "戌", "branchPinyin": "Xū",   "name": "Perro",     "chinese": "狗", "emoji": "🐕", "hours": "19:00–21:00", "personality": "Lealtad pura. Escucha más de lo que habla. Defiende a los suyos con una constancia que no requiere recompensa.", "compatibility": ["tiger", "horse"], "element_natural": "Earth" },
+    { "key": "pig",     "branch": "亥", "branchPinyin": "Hài",  "name": "Cerdo",     "chinese": "豬", "emoji": "🐖", "hours": "21:00–23:00", "personality": "Generoso, sincero, indulgente. Disfruta del placer compartido. Su confianza es un regalo que no todos merecen.", "compatibility": ["rabbit", "sheep"], "element_natural": "Water" }
+  ],
+  "elements": {
+    "Wood":  { "key": "wood",  "chinese": "木", "spanish": "Madera", "color": "var(--jade)",   "trait": "crecimiento, expansión, ímpetu primaveral" },
+    "Fire":  { "key": "fire",  "chinese": "火", "spanish": "Fuego",  "color": "var(--crimson)","trait": "pasión, visibilidad, transformación rápida" },
+    "Earth": { "key": "earth", "chinese": "土", "spanish": "Tierra", "color": "var(--gold)",   "trait": "estabilidad, nutrición, paciencia" },
+    "Metal": { "key": "metal", "chinese": "金", "spanish": "Metal",  "color": "var(--ink)",    "trait": "estructura, claridad, corte preciso" },
+    "Water": { "key": "water", "chinese": "水", "spanish": "Agua",   "color": "var(--violet)", "trait": "fluidez, profundidad, adaptabilidad" }
+  },
+  "stem_to_element": {
+    "甲": { "element": "Wood",  "polarity": "yang" },
+    "乙": { "element": "Wood",  "polarity": "yin"  },
+    "丙": { "element": "Fire",  "polarity": "yang" },
+    "丁": { "element": "Fire",  "polarity": "yin"  },
+    "戊": { "element": "Earth", "polarity": "yang" },
+    "己": { "element": "Earth", "polarity": "yin"  },
+    "庚": { "element": "Metal", "polarity": "yang" },
+    "辛": { "element": "Metal", "polarity": "yin"  },
+    "壬": { "element": "Water", "polarity": "yang" },
+    "癸": { "element": "Water", "polarity": "yin"  }
+  }
+}

@@ -1,0 +1,332 @@
+/* tools/natal-chart/style.css — Carta natal con violet como acento */
+
+.chart { position: relative; z-index: 2; min-height: 100vh; }
+
+.back-link {
+  position: fixed;
+  top: 1.5rem; left: 1.5rem;
+  z-index: 10;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  transition: color var(--t-fast);
+}
+.back-link:hover { color: var(--accent); }
+
+.chart-section {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--t-slow) var(--ease-breath), visibility 0s linear var(--t-slow);
+  overflow-y: auto;
+  z-index: 2;
+}
+.chart-section.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity var(--t-slow) var(--ease-breath), visibility 0s linear 0s;
+  z-index: 3;
+}
+
+/* ---------- INTRO ---------- */
+.chart__content {
+  width: min(560px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.chart__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+.chart__title-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.chart__title-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: var(--ink-soft);
+}
+
+.chart__subtitle {
+  font-style: italic;
+  color: var(--ink-faded);
+  max-width: 42ch;
+  margin: 0 auto;
+}
+
+.chart__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  text-align: left;
+}
+
+.chart__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+@media (max-width: 480px) {
+  .chart__form-grid { grid-template-columns: 1fr; }
+}
+
+.chart__form-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+.chart__form-checkbox input[type="checkbox"] {
+  appearance: auto;
+  accent-color: var(--accent);
+}
+
+.field__hint {
+  font-size: 0.8rem;
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+/* ---------- CHART VIEW ---------- */
+.chart__view {
+  width: min(900px, 96vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0 4rem;
+}
+
+.chart__view-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.chart__view-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.chart__view-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faded);
+}
+
+/* ---------- SVG WHEEL ---------- */
+.chart__svg-host {
+  width: min(560px, 95vw);
+  aspect-ratio: 1 / 1;
+}
+
+.chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart__ring {
+  fill: none;
+  stroke: var(--ink-faded);
+  stroke-width: 0.8;
+}
+.chart__ring--soft { opacity: 0.45; }
+
+.chart__sign-divider, .chart__house-divider {
+  stroke: var(--ink-faded);
+  stroke-width: 0.5;
+  opacity: 0.6;
+}
+
+.chart__sign-glyph {
+  font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', system-ui;
+  font-size: 22px;
+  fill: var(--accent);
+}
+
+.chart__house-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink-faded);
+  letter-spacing: 0.1em;
+}
+
+.chart__axis {
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+.chart__axis--asc {
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 1;
+}
+
+.chart__aspect {
+  stroke-width: 1.4;
+  fill: none;
+  opacity: 0.6;
+}
+.chart__aspect--sextile    { stroke: var(--jade); }
+.chart__aspect--square     { stroke: var(--crimson); }
+.chart__aspect--trine      { stroke: var(--accent); }
+.chart__aspect--opposition { stroke: var(--ink-soft); stroke-dasharray: 4 4; }
+
+.chart__planet-bg {
+  fill: var(--paper);
+  stroke: var(--ink-soft);
+  stroke-width: 1;
+}
+
+.chart__planet-glyph {
+  font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', system-ui;
+  font-size: 16px;
+  fill: var(--ink);
+}
+
+.chart__asc-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  fill: var(--accent);
+  font-weight: 700;
+}
+
+/* ---------- TABLES ---------- */
+.chart__tables {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 720px) {
+  .chart__tables { grid-template-columns: 1fr; }
+}
+
+.chart__table-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.chart__table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.chart__table th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-weight: 500;
+  text-align: left;
+  padding: 0.4rem 0.4rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.chart__table td {
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.05);
+  color: var(--ink-soft);
+}
+
+.chart__houses-list {
+  list-style: none;
+  counter-reset: house-counter;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.chart__houses-list li {
+  position: relative;
+  padding: 0.4rem 0 0.4rem 2rem;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.05);
+}
+.chart__houses-list li::before {
+  counter-increment: house-counter;
+  content: counter(house-counter, upper-roman);
+  position: absolute;
+  left: 0; top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  width: 1.6rem;
+  text-align: right;
+}
+
+.chart__aspects-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.chart__aspects-list li {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.chart__aspects-list .aspect-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.chart__aspects-list .aspect-dot--sextile    { background: var(--jade); }
+.chart__aspects-list .aspect-dot--square     { background: var(--crimson); }
+.chart__aspects-list .aspect-dot--trine      { background: var(--accent); }
+.chart__aspects-list .aspect-dot--opposition { background: var(--ink-soft); }
+
+.chart__actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,201 @@
+/* components.css — botones, hexagrama, líneas, texto split. Compartido entre tools. */
+
+/* ---------- Botones ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.8rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  transition: color var(--t-fast) var(--ease-out-soft),
+              transform var(--t-fast) var(--ease-out-soft);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--ink);
+  pointer-events: none;
+  transition: transform var(--t-medium) var(--ease-out-soft);
+  z-index: -1;
+}
+
+.btn:hover  { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary { color: var(--ink); }
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  transition: transform var(--t-medium) var(--ease-out-soft);
+  z-index: -1;
+}
+.btn--primary:hover         { color: var(--paper); }
+.btn--primary:hover::after  { transform: scaleY(1); }
+
+.btn--ghost {
+  border: 1px dashed var(--ink-faded);
+  color: var(--ink-soft);
+}
+.btn--ghost::before { display: none; }
+.btn--ghost:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+.btn[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn__shimmer {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 30%, transparent) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: shimmer 3s var(--ease-breath) infinite;
+}
+
+@keyframes shimmer {
+  0%        { left: -100%; }
+  60%, 100% { left:  200%; }
+}
+
+/* ---------- Hexagrama y líneas ---------- */
+.hexagram {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.hexagram__line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  position: relative;
+}
+
+.hexagram__line--empty::before {
+  content: "";
+  display: block;
+  width: 220px;
+  height: 1px;
+  border-top: 1px dashed rgba(26, 26, 26, 0.15);
+}
+
+.iching-line {
+  width: 220px;
+  height: 28px;
+  overflow: visible;
+}
+
+.iching-line .line-segment {
+  stroke: var(--ink);
+  stroke-width: 10;
+  stroke-linecap: butt;
+  fill: none;
+}
+
+.iching-line .line-mutable-mark {
+  fill: var(--accent);
+  stroke: var(--accent-soft);
+  stroke-width: 0.5;
+}
+
+/* ---------- Texto partido por letra ---------- */
+[data-split] {
+  display: inline;
+}
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.split-letter {
+  display: inline-block;
+}
+
+/* ---------- Form fields (input, textarea) ---------- */
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.field__input {
+  width: 100%;
+  padding: 0.6rem 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  border-bottom: 1px solid var(--ink-faded);
+  caret-color: var(--accent);
+  transition: border-color var(--t-fast) var(--ease-out-soft);
+}
+
+.field__input::placeholder {
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+.field:focus-within .field__input {
+  border-color: var(--accent);
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid var(--ink-faded);
+}
+
+.tabs__btn {
+  padding: 0.5rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  border-right: 1px solid var(--ink-faded);
+  transition: color var(--t-fast), background var(--t-fast);
+}
+.tabs__btn:last-child { border-right: 0; }
+.tabs__btn[aria-selected="true"] {
+  color: var(--paper);
+  background: var(--ink);
+}
+.tabs__btn:not([aria-selected="true"]):hover {
+  color: var(--ink);
+}

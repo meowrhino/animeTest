@@ -1,0 +1,49 @@
+/* tokens.css — design tokens compartidos. Paleta tinta china dreamy + acentos por tool. */
+
+:root {
+  /* Base — papel arroz / tinta */
+  --paper: #f4ede1;
+  --paper-warm: #efe5d2;
+  --paper-shadow: #e6dac0;
+  --ink: #1a1a1a;
+  --ink-soft: #2b2622;
+  --ink-faded: rgba(26, 26, 26, 0.55);
+
+  /* Acentos: cada tool elige uno como --accent */
+  --gold: #b8943f;
+  --gold-soft: #d4b46a;
+  --jade: #7a9b8a;
+  --jade-deep: #5d7e6c;
+  --crimson: #8a3a2e;
+  --violet: #5b4a7a;
+  --indigo: #2a3552;
+
+  /* Default accent (tool sobreescribe via [data-tool="x"] o --accent inline) */
+  --accent: var(--gold);
+  --accent-soft: var(--gold-soft);
+
+  /* Tipografía */
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-cn: "Noto Serif SC", "Songti SC", serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+
+  /* Easings de respiración (lentos, orgánicos) */
+  --ease-breath: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-breath-slow: cubic-bezier(0.45, 0.05, 0.25, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Tiempos */
+  --t-fast: 240ms;
+  --t-medium: 600ms;
+  --t-slow: 1200ms;
+
+  /* Layout */
+  --max-readable: 62ch;
+}
+
+/* Acento por herramienta — cada tool aplica data-tool en <body> */
+[data-tool="oracle"]      { --accent: var(--gold);    --accent-soft: var(--gold-soft); }
+[data-tool="natal-hex"]   { --accent: var(--jade);    --accent-soft: var(--jade-deep); }
+[data-tool="pakua"]       { --accent: var(--indigo);  --accent-soft: #4a5878; }
+[data-tool="zodiac"]      { --accent: var(--crimson); --accent-soft: #b35546; }
+[data-tool="natal-chart"] { --accent: var(--violet);  --accent-soft: #8576a4; }

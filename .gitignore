@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+.cache/
+.vscode/
+.idea/
+*.log
+
+# Editor swap files
+*.swp
+*.swo
+*~
+
+# Local Claude state (excluido para no contaminar el repo público)
+.claude/launch.json

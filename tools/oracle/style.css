@@ -1,0 +1,730 @@
+/* tools/oracle/style.css — layout, monedas y partículas del Oracle del I-Ching */
+
+/* ---------- Sección base ---------- */
+#oracle {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+}
+
+.oracle-section {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--t-slow) var(--ease-breath),
+              visibility 0s linear var(--t-slow);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.oracle-section.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity var(--t-slow) var(--ease-breath),
+              visibility 0s linear 0s;
+  z-index: 3;
+}
+
+.oracle-section--scroll.is-active {
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ---------- INTRO ---------- */
+.intro__content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.intro__glyph {
+  font-family: var(--font-cn);
+  font-size: clamp(8rem, 20vw, 16rem);
+  font-weight: 500;
+  line-height: 0.9;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.intro__subtitle {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+  max-width: 28ch;
+}
+
+.intro__hint {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-faded);
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+.ink-stains {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ink-stain {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0;
+}
+.ink-stain--1 {
+  top: 10%; left: 8%;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(26, 26, 26, 0.18) 0%, transparent 70%);
+}
+.ink-stain--2 {
+  bottom: 12%; right: 10%;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent) 0%, transparent 70%);
+}
+.ink-stain--3 {
+  top: 50%; right: 20%;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(122, 155, 138, 0.18) 0%, transparent 70%);
+}
+
+/* ---------- QUESTION ---------- */
+.question__content {
+  width: min(620px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.question__prompt {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-style: italic;
+  color: var(--ink);
+}
+
+.question__breath {
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+}
+
+.breath-circle {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  animation: breath 5s var(--ease-breath) infinite;
+}
+
+@keyframes breath {
+  0%, 100% { transform: scale(0.5); opacity: 0.4; }
+  50%      { transform: scale(1);   opacity: 1; }
+}
+
+.question__field {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.question__field textarea {
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  font-style: italic;
+  text-align: center;
+  padding: 1rem 0.5rem 1.5rem;
+  color: var(--ink);
+  caret-color: var(--accent);
+}
+
+.question__field textarea::placeholder {
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+.question__underline {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  transition: width var(--t-medium) var(--ease-out-soft);
+}
+
+.question__field:focus-within .question__underline,
+.question__field textarea:not(:placeholder-shown) ~ .question__underline {
+  width: 100%;
+}
+
+.question__method {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.method-option {
+  position: relative;
+  padding: 1rem 1.6rem;
+  border: 1px solid var(--ink-faded);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color var(--t-fast), background var(--t-fast);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 160px;
+}
+
+.method-option__glyph {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.method-option__name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+.method-option__hint {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.method-option[aria-selected="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+.method-option[aria-selected="true"] .method-option__name {
+  color: var(--accent);
+}
+
+/* ---------- THROW ---------- */
+#throw {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: clamp(2rem, 5vh, 4rem) clamp(1.5rem, 4vw, 4rem);
+}
+
+.throw__header {
+  text-align: center;
+  z-index: 2;
+}
+
+.throw__counter {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.throw__counter span:first-of-type {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.throw__question {
+  margin-top: 0.6rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  max-width: 50ch;
+  margin-inline: auto;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.throw__stage {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: min(1000px, 95vw);
+  margin-inline: auto;
+}
+
+.throw__coins {
+  position: relative;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  perspective: 800px;
+}
+
+.throw__hexagram-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.throw__cta {
+  margin-inline: auto;
+  z-index: 2;
+}
+
+@media (max-width: 760px) {
+  .throw__stage {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .throw__coins { height: 220px; }
+}
+
+/* ---------- Monedas (CSS 3D flip) ---------- */
+.coin {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  will-change: transform;
+}
+
+.coin__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 50%;
+}
+
+.coin__face--heads { transform: rotateY(0deg); }
+.coin__face--tails { transform: rotateY(180deg); }
+
+.coin__svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 8px rgba(26, 26, 26, 0.18));
+}
+
+.coin__rim   { fill: var(--paper-warm);   stroke: var(--ink-soft); stroke-width: 1.5; }
+.coin__inner { fill: none;                stroke: var(--ink-soft); stroke-width: 0.6; opacity: 0.5; }
+.coin__hole  { fill: var(--paper);        stroke: var(--ink-soft); stroke-width: 1; }
+.coin__char  { font-family: var(--font-cn); font-size: 13px; font-weight: 500; fill: var(--ink); dominant-baseline: middle; }
+.coin__face--tails .coin__rim { fill: var(--paper-shadow); }
+.coin__dot   { fill: var(--ink-soft); opacity: 0.7; }
+
+@media (max-width: 760px) {
+  .coin { width: 80px; height: 80px; }
+  .coin__char { font-size: 11px; }
+}
+
+/* ---------- Yarrow stalks (varitas) ---------- */
+.throw__stalks {
+  position: relative;
+  height: 280px;
+  display: grid;
+  place-items: center;
+}
+
+.stalk-pile {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.stalk {
+  position: absolute;
+  width: 2px;
+  height: 90px;
+  background: linear-gradient(to bottom, var(--accent-soft), var(--ink-soft));
+  border-radius: 1px;
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+}
+
+.stalk-groups {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.stalk-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+}
+
+.stalk-group__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.stalk-group__count {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .throw__stalks { height: 220px; }
+}
+
+/* ---------- REVEAL ---------- */
+.reveal__content {
+  position: relative;
+  width: min(1100px, 95vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.reveal__halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 70vmin; height: 70vmin;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent) 0%, transparent 60%);
+  filter: blur(20px);
+  z-index: 0;
+  opacity: 0;
+}
+
+.reveal__hexagrams {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.reveal__hexagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.reveal__caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.reveal__arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faded);
+}
+
+.reveal__arrow svg {
+  width: 80px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.reveal__meta {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.reveal__number {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.reveal__name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 400;
+}
+
+.reveal__name-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.reveal__name-py {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+.reveal__meaning {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--ink);
+  margin-top: 0.4rem;
+}
+
+.reveal__trigrams {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+/* ---------- READING ---------- */
+.reading__progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100vh;
+  background: rgba(26, 26, 26, 0.06);
+  z-index: 5;
+}
+
+.reading__progress-bar {
+  display: block;
+  width: 100%;
+  height: 0%;
+  background: var(--accent);
+  transition: height 80ms linear;
+}
+
+.reading__article {
+  max-width: var(--max-readable);
+  margin: clamp(3rem, 8vh, 6rem) auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.reading__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.reading__question {
+  font-style: italic;
+  color: var(--ink-faded);
+  font-size: 0.95rem;
+  max-width: 50ch;
+}
+
+.reading__hex-mini {
+  transform: scale(0.6);
+  margin: -0.5rem 0;
+}
+
+.reading__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-weight: 400;
+}
+
+.reading__title #reading-name-cn {
+  font-family: var(--font-cn);
+  font-size: 2.4rem;
+}
+
+.reading__title small {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+}
+
+.reading__title em {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 0.4rem;
+}
+
+.reading__block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reading__block-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-weight: 500;
+}
+
+.reading__quote {
+  position: relative;
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.5;
+  padding: 1.5rem 1.8rem;
+  border-left: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.reading__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  list-style: none;
+  counter-reset: line-counter;
+}
+
+.reading__lines li {
+  position: relative;
+  padding-left: 2.5rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.reading__lines li::before {
+  counter-increment: line-counter;
+  content: counter(line-counter);
+  position: absolute;
+  left: 0; top: 0;
+  font-family: var(--font-mono);
+  font-style: normal;
+  color: var(--accent);
+  font-size: 0.85rem;
+  width: 2rem;
+  text-align: right;
+}
+
+.reading__secondary-name {
+  font-family: var(--font-cn);
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+}
+
+.reading__footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4rem;
+}
+
+/* ---------- OUTRO ---------- */
+.outro__content {
+  position: relative;
+  width: min(800px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  text-align: center;
+}
+
+.outro__hexagram {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: grid;
+  place-items: center;
+}
+
+.outro__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.outro__farewell {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-style: italic;
+  color: var(--ink);
+  max-width: 30ch;
+}
+
+.outro__particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink-soft);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.outro__particle--gold { background: var(--accent); }
+.outro__particle--jade { background: var(--jade); }
+
+/* ---------- Hexagram size variants in oracle ---------- */
+.reveal__hexagram-svg .hexagram { gap: 12px; }
+.reveal__hexagram-svg .hexagram__line { height: 36px; }
+.reveal__hexagram-svg .iching-line { width: 280px; height: 36px; }
+.reveal__hexagram-svg .iching-line .line-segment { stroke-width: 14; }
+
+.reading__hex-mini .hexagram { gap: 6px; }
+.reading__hex-mini .hexagram__line { height: 22px; }
+.reading__hex-mini .iching-line { width: 160px; height: 22px; }
+.reading__hex-mini .iching-line .line-segment { stroke-width: 8; }
+
+.outro__hexagram .hexagram { gap: 10px; }
+.outro__hexagram .hexagram__line { height: 30px; }
+.outro__hexagram .iching-line { width: 200px; height: 30px; }
+.outro__hexagram .iching-line .line-segment { stroke-width: 11; }

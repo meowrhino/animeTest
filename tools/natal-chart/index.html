@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>星盤 — Carta natal</title>
+    <meta name="description" content="Carta astral con sistema de casas de signo entero (whole sign houses). Cálculo astronómico real con astronomy-engine." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../shared/styles/tokens.css" />
+    <link rel="stylesheet" href="../../shared/styles/base.css" />
+    <link rel="stylesheet" href="../../shared/styles/components.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-tool="natal-chart">
+    <div class="grain" aria-hidden="true"></div>
+    <a href="../../" class="back-link" aria-label="Volver al portal">← Suite</a>
+
+    <main class="chart">
+      <!-- 1. INTRO + FORM -->
+      <section id="intro" class="chart-section is-active" data-section="intro">
+        <div class="chart__content">
+          <header class="chart__header">
+            <h1 class="chart__title">
+              <span class="chart__title-cn" aria-hidden="true">星盤</span>
+              <span class="chart__title-text">Carta natal</span>
+            </h1>
+            <p class="chart__subtitle"><span data-split>Casas de signo entero. La técnica más antigua de la astrología occidental.</span></p>
+          </header>
+
+          <form class="chart__form" id="chart-form">
+            <label class="field">
+              <span class="field__label">Nombre (opcional)</span>
+              <input class="field__input" type="text" id="birth-name" placeholder="Tu nombre" />
+            </label>
+
+            <div class="chart__form-grid">
+              <label class="field">
+                <span class="field__label">Fecha</span>
+                <input class="field__input" type="date" id="birth-date" required value="1990-01-01" />
+              </label>
+              <label class="field">
+                <span class="field__label">Hora</span>
+                <input class="field__input" type="time" id="birth-time" value="12:00" />
+              </label>
+            </div>
+
+            <label class="field chart__form-checkbox">
+              <input type="checkbox" id="unknown-time" />
+              <span>No conozco la hora exacta (sin casas)</span>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Lugar de nacimiento</span>
+              <input class="field__input" type="text" id="birth-place" placeholder="Ciudad, País" value="Barcelona, España" />
+              <span class="field__hint" id="place-hint"></span>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Zona horaria</span>
+              <input class="field__input" type="text" id="birth-tz" placeholder="Europe/Madrid" value="Europe/Madrid" />
+            </label>
+
+            <button class="btn btn--primary" type="submit">
+              <span>Calcular mi carta</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- 2. CHART -->
+      <section id="chart" class="chart-section" data-section="chart">
+        <div class="chart__view">
+          <header class="chart__view-header">
+            <h2 class="chart__view-title" id="view-name">Carta natal</h2>
+            <p class="chart__view-meta" id="view-meta"></p>
+          </header>
+
+          <div class="chart__svg-host" id="chart-svg-host">
+            <!-- SVG injected here -->
+          </div>
+
+          <div class="chart__tables">
+            <section class="chart__table">
+              <h3 class="chart__table-title">Planetas</h3>
+              <table id="planets-table">
+                <thead>
+                  <tr><th>Planeta</th><th>Signo</th><th>Casa</th><th>Dignidad</th></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </section>
+
+            <section class="chart__table">
+              <h3 class="chart__table-title">Casas</h3>
+              <ol class="chart__houses-list" id="houses-list"></ol>
+            </section>
+
+            <section class="chart__table">
+              <h3 class="chart__table-title">Aspectos clave</h3>
+              <ul class="chart__aspects-list" id="aspects-list"></ul>
+            </section>
+          </div>
+
+          <div class="chart__actions">
+            <button class="btn btn--ghost" data-action="goto" data-target="intro">Calcular otra</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,285 @@
+/* tools/zodiac/style.css — Horóscopo chino. Acento crimson. */
+
+.zodiac { position: relative; z-index: 2; min-height: 100vh; }
+
+.back-link {
+  position: fixed;
+  top: 1.5rem; left: 1.5rem;
+  z-index: 10;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  transition: color var(--t-fast);
+}
+.back-link:hover { color: var(--accent); }
+
+.zodiac-section {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--t-slow) var(--ease-breath), visibility 0s linear var(--t-slow);
+  overflow-y: auto;
+  z-index: 2;
+}
+.zodiac-section.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity var(--t-slow) var(--ease-breath), visibility 0s linear 0s;
+  z-index: 3;
+}
+
+/* ---------- INTRO ---------- */
+.zodiac__content {
+  width: min(720px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.zodiac__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+.zodiac__title-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.zodiac__title-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: var(--ink-soft);
+}
+
+.zodiac__subtitle {
+  font-style: italic;
+  color: var(--ink-faded);
+  max-width: 42ch;
+  font-size: 1rem;
+}
+
+/* ---------- WHEEL ---------- */
+.zodiac__wheel-host {
+  width: clamp(220px, 40vw, 320px);
+  height: clamp(220px, 40vw, 320px);
+  position: relative;
+}
+
+.wheel-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wheel-segment {
+  fill: none;
+  stroke: var(--ink-faded);
+  stroke-width: 0.5;
+  transition: fill var(--t-fast);
+}
+
+.wheel-segment.is-active {
+  fill: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.wheel-glyph {
+  font-size: 18px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: var(--ink-soft);
+}
+
+.wheel-glyph.is-active {
+  fill: var(--accent);
+  font-weight: 700;
+}
+
+/* ---------- FORM ---------- */
+.zodiac__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  width: min(480px, 100%);
+}
+
+.zodiac__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+@media (max-width: 480px) {
+  .zodiac__form-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- REVEAL ---------- */
+.zodiac__reveal {
+  width: min(720px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 2rem 0 4rem;
+}
+
+.zodiac__caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.zodiac__animal-big {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.zodiac__animal-emoji {
+  font-size: clamp(4rem, 12vw, 7rem);
+  line-height: 1;
+}
+
+.zodiac__animal-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: var(--ink);
+  line-height: 1;
+}
+
+.zodiac__animal-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.zodiac__animal-element {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* ---------- PILLARS ---------- */
+.zodiac__pillars {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.zodiac__pillars-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+}
+
+.zodiac__pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .zodiac__pillars-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem 0.6rem;
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  background: rgba(255, 252, 245, 0.5);
+}
+
+.pillar__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+}
+
+.pillar__emoji {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.pillar__animal {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.pillar__element {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+/* ---------- BLOCKS ---------- */
+.zodiac__personality, .zodiac__compat {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 1.5rem;
+}
+
+.zodiac__block-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-weight: 500;
+}
+
+.zodiac__personality p, .zodiac__compat p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.zodiac__actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
