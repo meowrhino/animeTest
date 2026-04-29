@@ -159,16 +159,24 @@
   gap: 0.6rem;
 }
 
-.zodiac__animal-emoji {
-  font-size: clamp(4rem, 12vw, 7rem);
-  line-height: 1;
-}
-
 .zodiac__animal-cn {
   font-family: var(--font-cn);
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: clamp(5rem, 13vw, 8rem);
   color: var(--ink);
   line-height: 1;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.zodiac__animal-py {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--ink-faded);
+  letter-spacing: 0.1em;
+  margin-top: 0.4rem;
 }
 
 .zodiac__animal-name {
@@ -233,9 +241,11 @@
   color: var(--ink-faded);
 }
 
-.pillar__emoji {
-  font-size: 1.8rem;
+.pillar__cn {
+  font-family: var(--font-cn);
+  font-size: 2rem;
   line-height: 1;
+  color: var(--ink);
 }
 
 .pillar__animal {

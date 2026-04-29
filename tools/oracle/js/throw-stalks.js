@@ -52,17 +52,22 @@ export function createStalkThrow({ host }) {
     stations.push({ el: g, label, count });
   }
 
-  // Posición inicial del abanico de varitas
+  // Posición inicial del abanico de varitas. Cada varita se planta como un palo recto
+  // que apunta hacia abajo desde un punto pivote común (efecto abanico de Sai).
   function positionFan() {
-    const baseY = 0;
-    const radius = 110;
+    const fanArc = 70; // grados totales del abanico
+    const stepDeg = fanArc / (STALK_COUNT - 1);
     stalkEls.forEach((s, i) => {
-      const angle = (i - (STALK_COUNT - 1) / 2) * 1.4;
+      const angle = -fanArc / 2 + i * stepDeg;
       const rad = (angle * Math.PI) / 180;
+      // Pivote común desplazado hacia abajo, las puntas se abren hacia arriba.
+      // El radio determina la separación de las puntas.
+      const radius = 80;
       utils.set(s, {
-        translateX: Math.sin(rad) * 8,
-        translateY: baseY,
+        translateX: Math.sin(rad) * radius,
+        translateY: -Math.cos(rad) * radius + radius,
         rotate: angle,
+        transformOrigin: '50% 100%',
         opacity: 0,
       });
     });

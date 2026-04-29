@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>時辰 — Reloj de meridianos</title>
+    <meta name="description" content="Reloj de los 12 meridianos chinos: cada franja horaria con su meridiano activo y la recomendación de qué hacer en ese momento del día." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../shared/styles/tokens.css" />
+    <link rel="stylesheet" href="../../shared/styles/base.css" />
+    <link rel="stylesheet" href="../../shared/styles/components.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-tool="meridian-clock">
+    <div class="grain" aria-hidden="true"></div>
+    <a href="../../" class="back-link" aria-label="Volver al portal">← Suite</a>
+
+    <main class="clock-page">
+      <header class="clock-page__header">
+        <h1 class="clock-page__title">
+          <span class="clock-page__title-cn" aria-hidden="true">時辰</span>
+          <span class="clock-page__title-text">Reloj de los meridianos</span>
+        </h1>
+        <p class="clock-page__subtitle"><span data-split>Cada dos horas, un meridiano. El cuerpo respira en doce tiempos.</span></p>
+      </header>
+
+      <div class="clock-page__main">
+        <div class="meridian-clock" id="meridian-clock">
+          <!-- Inyectado: SVG -->
+        </div>
+
+        <div class="clock-page__current" id="clock-current">
+          <p class="clock-page__hour" id="clock-hour">—:—</p>
+          <p class="clock-page__meridian" id="clock-meridian">—</p>
+          <p class="clock-page__recommendation" id="clock-recommendation"></p>
+          <p class="clock-page__associations" id="clock-associations"></p>
+        </div>
+      </div>
+
+      <section class="clock-page__list">
+        <h2 class="clock-page__list-title">Las doce franjas</h2>
+        <ol class="clock-page__items" id="clock-items">
+          <!-- Inyectado: 12 meridianos con timeSlot -->
+        </ol>
+      </section>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

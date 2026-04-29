@@ -1,0 +1,461 @@
+/* tools/acupuncture/style.css — Acento jade (madera/hígado), papel arroz */
+
+[data-tool="acupuncture"] {
+  --accent: var(--jade);
+  --accent-soft: var(--jade-deep);
+}
+
+.acu {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: clamp(2rem, 5vh, 4rem) clamp(1rem, 4vw, 2rem) 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vh, 4rem);
+}
+
+.back-link {
+  position: fixed;
+  top: 1.5rem; left: 1.5rem;
+  z-index: 10;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  transition: color var(--t-fast);
+}
+.back-link:hover { color: var(--accent); }
+
+/* ---------- HERO + CLOCK ---------- */
+.acu__hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .acu__hero { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+.acu__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+.acu__title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+.acu__title-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.acu__title-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  color: var(--ink-soft);
+}
+
+.acu__subtitle {
+  font-style: italic;
+  color: var(--ink-faded);
+  max-width: 42ch;
+  font-size: 1rem;
+}
+
+/* Reloj de meridianos */
+.meridian-clock {
+  width: clamp(240px, 38vw, 360px);
+  height: clamp(240px, 38vw, 360px);
+  margin: 0 auto;
+  position: relative;
+}
+
+.meridian-clock svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.meridian-clock__sector {
+  fill: none;
+  stroke: rgba(26, 26, 26, 0.12);
+  stroke-width: 0.5;
+  transition: fill var(--t-medium) var(--ease-out-soft);
+}
+
+.meridian-clock__sector.is-current {
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.meridian-clock__sector-divider {
+  stroke: rgba(26, 26, 26, 0.1);
+  stroke-width: 0.5;
+}
+
+.meridian-clock__sector-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  fill: var(--ink-faded);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.meridian-clock__sector.is-current ~ .meridian-clock__sector-label,
+.meridian-clock__sector-label.is-current {
+  fill: var(--accent);
+  font-weight: 700;
+}
+
+.meridian-clock__hand {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.meridian-clock__center {
+  fill: var(--accent);
+}
+
+.meridian-clock__hour-text {
+  font-family: var(--font-cn);
+  font-size: 22px;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.meridian-clock__current {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.meridian-clock__hour {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-faded);
+  text-transform: uppercase;
+}
+
+.meridian-clock__meridian {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  color: var(--ink);
+}
+
+.meridian-clock__meridian em {
+  font-family: var(--font-cn);
+  font-style: normal;
+  color: var(--accent);
+  font-size: 1.2em;
+  margin-right: 0.4rem;
+}
+
+.meridian-clock__recommendation {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---------- BROWSER ---------- */
+.acu__browser {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.acu__browser-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  padding-bottom: 1rem;
+}
+
+.acu__browser-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.acu__browser-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-faded);
+}
+
+.acu__filters { display: flex; gap: 1rem; }
+
+.acu__search-field { flex: 1; max-width: 480px; }
+
+.acu__meridian-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.acu__meridian-tab {
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  border: 1px solid rgba(26, 26, 26, 0.12);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
+}
+
+.acu__meridian-tab:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+.acu__meridian-tab[aria-selected="true"] {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.acu__points-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+
+.acu__point {
+  background: rgba(255, 252, 245, 0.5);
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition:
+    transform var(--t-fast) var(--ease-out-soft),
+    border-color var(--t-fast),
+    background var(--t-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.acu__point:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: rgba(255, 252, 245, 0.85);
+}
+
+.acu__point__code {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.acu__point__cn {
+  font-family: var(--font-cn);
+  font-size: 1.3rem;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.acu__point__py {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.acu__point__es {
+  font-size: 0.8rem;
+  color: var(--ink-faded);
+}
+
+.acu__points-list--empty::after {
+  content: "Sin resultados.";
+  display: block;
+  grid-column: 1 / -1;
+  padding: 2rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-faded);
+}
+
+/* ---------- DETAIL MODAL ---------- */
+.acu__detail {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.acu__detail-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(244, 237, 225, 0.85);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.acu__detail-card {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 2rem clamp(1.2rem, 4vw, 2.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-shadow: 0 20px 60px rgba(26, 26, 26, 0.18);
+}
+
+.acu__detail-close {
+  position: absolute;
+  top: 0.6rem; right: 0.8rem;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--ink-faded);
+  padding: 0.4rem 0.6rem;
+  transition: color var(--t-fast);
+}
+.acu__detail-close:hover { color: var(--accent); }
+
+.acu__detail-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  padding-bottom: 1rem;
+}
+
+.acu__detail-code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.acu__detail-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-weight: 400;
+}
+
+.acu__detail-cn {
+  font-family: var(--font-cn);
+  font-size: 2.2rem;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.acu__detail-py {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+.acu__detail-spanish {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.acu__detail-meridian {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--ink-faded);
+  text-transform: uppercase;
+}
+
+.acu__detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.acu__detail-block-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-weight: 500;
+}
+
+.acu__detail-block p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.acu__detail-indications {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.acu__detail-indications li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.acu__detail-indications li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.acu__detail-indications:empty::after {
+  content: "Indicaciones detalladas pendientes de transcripción.";
+  font-style: italic;
+  color: var(--ink-faded);
+  font-size: 0.9rem;
+}

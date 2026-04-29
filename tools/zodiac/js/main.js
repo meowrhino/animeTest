@@ -56,8 +56,8 @@ function renderReveal() {
   const animal = r.primary;
   const element = r.primaryElement;
 
-  document.getElementById('animal-emoji').textContent = animal.emoji;
   document.getElementById('animal-cn').textContent = animal.chinese;
+  document.getElementById('animal-py').textContent = animal.branchPinyin;
   document.getElementById('animal-name').textContent = animal.name;
   document.getElementById('animal-element').textContent = `${element.spanish} ${r.primaryPolarity || ''}`.trim();
   document.getElementById('personality-text').textContent = animal.personality;
@@ -65,7 +65,7 @@ function renderReveal() {
   // Compatibility
   const compatNames = animal.compatibility.map((key) => {
     const a = state.zodiacData.animals.find((x) => x.key === key);
-    return `${a.emoji} ${a.name}`;
+    return `${a.chinese} ${a.name}`;
   });
   document.getElementById('compat-text').textContent =
     `Tu animal se entiende especialmente bien con: ${compatNames.join(' · ')}.`;
@@ -79,7 +79,7 @@ function renderReveal() {
     cell.className = 'pillar';
     cell.innerHTML = `
       <span class="pillar__label">${labels[key]}</span>
-      <span class="pillar__emoji">${pillar.animal.emoji}</span>
+      <span class="pillar__cn">${pillar.animal.chinese}</span>
       <span class="pillar__animal">${pillar.animal.name}</span>
       <span class="pillar__element">${pillar.element.spanish}</span>
     `;

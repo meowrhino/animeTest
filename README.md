@@ -4,15 +4,17 @@ Cinco herramientas de adivinación construidas sobre HTML + CSS + JavaScript pla
 
 Empezó como un test de anime.js (un oráculo del I-Ching) y creció hasta convertirse en una pequeña suite que mezcla I-Ching, BaZi, horóscopo chino y astrología occidental con casas de signo entero.
 
-## Las cinco herramientas
+## Las siete herramientas
 
 | Tool | Carpeta | Qué hace |
 |---|---|---|
 | **Oráculo del I-Ching** | `tools/oracle/` | Consulta al Libro de los Cambios. Tiradas con monedas (rápido) o con varitas de milenrama (ritual estilizado). |
 | **Hexagrama de nacimiento** | `tools/natal-hex/` | Hexagrama natal calculado por tres métodos: Jīng Fáng (Plum Blossom), numerología, BaZi. Interpretaciones natales en markdown. |
-| **Pakua interactivo** | `tools/pakua/` | Dos prismas octagonales 3D (Three.js) con los Bagua Anterior y Posterior. Embebido del repo [pakuafun](https://github.com/manu/pakuafun). |
-| **Horóscopo chino** | `tools/zodiac/` | Tu animal y elemento + los cuatro pilares (年月日時) según fecha y hora de nacimiento. |
+| **Pakua interactivo** | `tools/pakua/` | Dos prismas octagonales 3D (Three.js) con los Bagua Anterior y Posterior. Embebido del repo [pakuafun](https://github.com/meowrhino/pakuafun). |
+| **Horóscopo chino** | `tools/zodiac/` | Tu animal, elemento y los cuatro pilares (年月日時) según fecha y hora de nacimiento. |
 | **Carta natal** | `tools/natal-chart/` | Astrología occidental con sistema de casas de signo entero. Cálculo astronómico real con [astronomy-engine](https://github.com/cosinekitty/astronomy). |
+| **Reloj de meridianos** | `tools/meridian-clock/` | Las doce franjas de dos horas del día chino. El meridiano activo se ilumina y muestra la recomendación correspondiente. |
+| **Puntos de acupuntura** | `tools/acupuncture/` | Visor de los 361 puntos canónicos (estándar OMS) organizados por meridiano. Búsqueda por nombre / pinyin / código / indicación. |
 
 ## Estructura
 
@@ -66,7 +68,7 @@ python3 -m http.server 8765
 ## Inspiraciones / fuentes
 
 - Wilhelm-Baynes para el I-Ching.
-- Los repos personales de Manu: [hexagramaNacimiento](https://github.com/manu/hexagramaNacimiento), [pakuafun](https://github.com/manu/pakuafun), [wholeSignHouseChart](https://github.com/manu/wholeSignHouseChart).
+- Los repos personales de Manu: [hexagramaNacimiento](https://github.com/meowrhino/hexagramaNacimiento), [pakuafun](https://github.com/meowrhino/pakuafun), [wholeSignHouseChart](https://github.com/meowrhino/wholeSignHouseChart).
 
 ---
 

@@ -203,8 +203,10 @@
 }
 
 .method-option__glyph {
-  font-size: 1.6rem;
+  font-family: var(--font-cn);
+  font-size: 1.8rem;
   line-height: 1;
+  color: var(--accent);
 }
 .method-option__name {
   font-family: var(--font-mono);
@@ -630,7 +632,6 @@
   flex-direction: column;
   gap: 0.8rem;
   list-style: none;
-  counter-reset: line-counter;
 }
 
 .reading__lines li {
@@ -640,9 +641,10 @@
   color: var(--ink-soft);
 }
 
+/* El número viene de `data-line-num` (posición real 1..6) — no de un counter CSS,
+   porque las líneas mutables no son consecutivas (puede aparecer línea 1 y 4) */
 .reading__lines li::before {
-  counter-increment: line-counter;
-  content: counter(line-counter);
+  content: attr(data-line-num);
   position: absolute;
   left: 0; top: 0;
   font-family: var(--font-mono);

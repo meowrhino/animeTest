@@ -63,6 +63,49 @@ function init() {
     ease: 'inOutSine',
     delay: 2400,
   });
+
+  // Page-out transition: al clicar una card, fade del portal antes de navegar
+  document.querySelectorAll('.portal__link').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || link.target === '_blank') return;
+      e.preventDefault();
+      const card = link.closest('.portal__card');
+
+      // La card clicada se queda más tiempo en pantalla (anchor visual)
+      const others = [...document.querySelectorAll('.portal__card')].filter((c) => c !== card);
+      const titleEl = document.querySelector('.portal__title');
+      const subtitleEl = document.querySelector('.portal__subtitle');
+      const creditsEl = document.querySelector('.portal__credits');
+
+      animate(others, {
+        opacity: [1, 0],
+        translateY: [0, 8],
+        duration: 320,
+        delay: stagger(30),
+        ease: 'inQuad',
+      });
+      animate([titleEl, subtitleEl, creditsEl], {
+        opacity: [1, 0],
+        translateY: [0, 6],
+        duration: 320,
+        delay: stagger(20),
+        ease: 'inQuad',
+      });
+      animate(card, {
+        scale: [1, 1.02],
+        duration: 600,
+        ease: 'outQuad',
+      });
+      animate(card, {
+        opacity: [1, 0],
+        duration: 360,
+        ease: 'inQuad',
+        delay: 280,
+        onComplete: () => { window.location.href = href; },
+      });
+    });
+  });
 }
 
 if (document.readyState === 'loading') {

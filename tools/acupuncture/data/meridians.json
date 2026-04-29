@@ -1,0 +1,172 @@
+{
+  "meridians": [
+    {
+      "code": "LU",
+      "chinese": "肺",
+      "pinyin": "Fèi",
+      "spanish": "Pulmón",
+      "element": "Metal",
+      "polarity": "yin",
+      "pointCount": 11,
+      "timeSlot": { "start": "03:00", "end": "05:00", "startHour": 3 },
+      "recommendation": "El meridiano del Pulmón abre el día. Es la hora del primer aliento, del soltar lo viejo. Buen momento para meditación silenciosa, qigong respiratorio o despertar suave. Si te despiertas a esta hora con frecuencia, suele apuntar a duelo no procesado.",
+      "associations": "Piel, mucosas, sistema respiratorio. Emoción: tristeza/duelo. Sentido: olfato. Tejido: piel y vello corporal."
+    },
+    {
+      "code": "LI",
+      "chinese": "大腸",
+      "pinyin": "Dà Cháng",
+      "spanish": "Intestino Grueso",
+      "element": "Metal",
+      "polarity": "yang",
+      "pointCount": 20,
+      "timeSlot": { "start": "05:00", "end": "07:00", "startHour": 5 },
+      "recommendation": "Hora natural para evacuar y dejar marchar (físico y emocional). Bebe agua templada. Movimiento suave, estiramientos. El cuerpo está listo para soltar — escúchalo.",
+      "associations": "Sistema digestivo bajo, eliminación. Pareja yang del Pulmón."
+    },
+    {
+      "code": "ST",
+      "chinese": "胃",
+      "pinyin": "Wèi",
+      "spanish": "Estómago",
+      "element": "Earth",
+      "polarity": "yang",
+      "pointCount": 45,
+      "timeSlot": { "start": "07:00", "end": "09:00", "startHour": 7 },
+      "recommendation": "La mejor hora para el desayuno: el Estómago está en su pico energético. Comida cálida, cocinada, nutritiva. Saltarse el desayuno aquí pesa el resto del día.",
+      "associations": "Recibir y digerir (físico y mental). Emoción: ansiedad por preocupación. Tejido: músculos."
+    },
+    {
+      "code": "SP",
+      "chinese": "脾",
+      "pinyin": "Pí",
+      "spanish": "Bazo",
+      "element": "Earth",
+      "polarity": "yin",
+      "pointCount": 21,
+      "timeSlot": { "start": "09:00", "end": "11:00", "startHour": 9 },
+      "recommendation": "Pico de transformación y transporte. Hora ideal para trabajo concentrado, estudio, tareas que pidan claridad mental. La digestión del desayuno está produciendo qi disponible.",
+      "associations": "Transformación de comida en sangre y qi. Emoción: sobrepensar/rumiar. Sentido: gusto. Tejido: tejido conectivo."
+    },
+    {
+      "code": "HT",
+      "chinese": "心",
+      "pinyin": "Xīn",
+      "spanish": "Corazón",
+      "element": "Fire",
+      "polarity": "yin",
+      "pointCount": 9,
+      "timeSlot": { "start": "11:00", "end": "13:00", "startHour": 11 },
+      "recommendation": "Hora de comida principal y de la pausa del mediodía. El Corazón aloja al Shen (espíritu). Reír, conectar con otros, comer en compañía. Evitar conflictos.",
+      "associations": "Conciencia, alegría, amor. Sede del Shen. Emoción: alegría (en exceso, agitación). Sentido: tacto/lengua."
+    },
+    {
+      "code": "SI",
+      "chinese": "小腸",
+      "pinyin": "Xiǎo Cháng",
+      "spanish": "Intestino Delgado",
+      "element": "Fire",
+      "polarity": "yang",
+      "pointCount": 19,
+      "timeSlot": { "start": "13:00", "end": "15:00", "startHour": 13 },
+      "recommendation": "Discriminación: separar lo puro de lo impuro. Hora propicia para tomar decisiones que requieren juicio claro. Si sientes pesadez tras comer, aquí es donde se procesa.",
+      "associations": "Asimilación de nutrientes y de información. Pareja yang del Corazón. Mental: claridad de discernimiento."
+    },
+    {
+      "code": "BL",
+      "chinese": "膀胱",
+      "pinyin": "Páng Guāng",
+      "spanish": "Vejiga",
+      "element": "Water",
+      "polarity": "yang",
+      "pointCount": 67,
+      "timeSlot": { "start": "15:00", "end": "17:00", "startHour": 15 },
+      "recommendation": "Pico de qi y memoria. Buen momento para estudiar, retener información, planificar el día siguiente. El meridiano más largo del cuerpo trabajando a tope.",
+      "associations": "Eliminación de líquidos. Pareja yang del Riñón. Recorre toda la espalda con los Shu de espalda (cada órgano tiene su punto)."
+    },
+    {
+      "code": "KI",
+      "chinese": "腎",
+      "pinyin": "Shèn",
+      "spanish": "Riñón",
+      "element": "Water",
+      "polarity": "yin",
+      "pointCount": 27,
+      "timeSlot": { "start": "17:00", "end": "19:00", "startHour": 17 },
+      "recommendation": "Hora de cena ligera. El Riñón guarda la esencia (Jing) y la voluntad (Zhi). Buen momento para reflexión, escritura, decisiones de fondo. No agotarse — la esencia se conserva.",
+      "associations": "Esencia, vitalidad heredada, agua y huesos. Emoción: miedo. Sentido: oído. Tejido: huesos y médula. Sede del Zhi (voluntad)."
+    },
+    {
+      "code": "PC",
+      "chinese": "心包",
+      "pinyin": "Xīn Bāo",
+      "spanish": "Pericardio",
+      "element": "Fire",
+      "polarity": "yin",
+      "pointCount": 9,
+      "timeSlot": { "start": "19:00", "end": "21:00", "startHour": 19 },
+      "recommendation": "Conexión íntima, conversación profunda, sexualidad consciente. El Pericardio protege al Corazón — buen momento para abrirse con los más cercanos sin abrir las defensas con extraños.",
+      "associations": "Protector del Corazón. Circulación. Emoción: protección emocional, vulnerabilidad mediada."
+    },
+    {
+      "code": "TE",
+      "chinese": "三焦",
+      "pinyin": "Sān Jiāo",
+      "spanish": "Triple Calentador",
+      "element": "Fire",
+      "polarity": "yang",
+      "pointCount": 23,
+      "timeSlot": { "start": "21:00", "end": "23:00", "startHour": 21 },
+      "recommendation": "Bajada gradual hacia el sueño. Atenuar luces, bajar pantallas. Estiramientos suaves, ducha tibia. El Triple Calentador armoniza las tres regiones del cuerpo — armonizate tú también.",
+      "associations": "Coordinador de los tres calentadores (jiaos). Termorregulación. Pareja yang del Pericardio."
+    },
+    {
+      "code": "GB",
+      "chinese": "膽",
+      "pinyin": "Dǎn",
+      "spanish": "Vesícula Biliar",
+      "element": "Wood",
+      "polarity": "yang",
+      "pointCount": 44,
+      "timeSlot": { "start": "23:00", "end": "01:00", "startHour": 23 },
+      "recommendation": "Sueño profundo: la Vesícula necesita estar inconsciente para sus funciones nocturnas. Despertarse aquí indica decisiones pendientes que el cuerpo está intentando procesar. Dormir antes de las 23:00 es uno de los mejores hábitos en MTC.",
+      "associations": "Decisión, valor para actuar, asertividad. Pareja yang del Hígado. Emoción: rabia/coraje contenido."
+    },
+    {
+      "code": "LV",
+      "chinese": "肝",
+      "pinyin": "Gān",
+      "spanish": "Hígado",
+      "element": "Wood",
+      "polarity": "yin",
+      "pointCount": 14,
+      "timeSlot": { "start": "01:00", "end": "03:00", "startHour": 1 },
+      "recommendation": "Detoxificación profunda mientras duermes. El Hígado almacena la sangre y suaviza el qi. Despertar aquí frecuentemente apunta a frustración estancada o exceso de alcohol/medicamentos.",
+      "associations": "Almacena sangre, libera qi suavemente. Emoción: ira/frustración. Sentido: vista. Tejido: tendones."
+    },
+    {
+      "code": "GV",
+      "chinese": "督脈",
+      "pinyin": "Dū Mài",
+      "spanish": "Vaso Gobernador",
+      "element": "Extraordinario",
+      "polarity": "yang",
+      "pointCount": 28,
+      "timeSlot": null,
+      "recommendation": "Vaso extraordinario, recorre la columna y la cabeza por la línea media posterior. Mar del Yang. Trabaja sobre claridad mental, postura, autoridad personal.",
+      "associations": "Mar del Yang. Conexión con el sistema nervioso central. Punto del despertar (GV20 baihui), del valor (GV4 mingmen)."
+    },
+    {
+      "code": "CV",
+      "chinese": "任脈",
+      "pinyin": "Rèn Mài",
+      "spanish": "Vaso Concepción",
+      "element": "Extraordinario",
+      "polarity": "yin",
+      "pointCount": 24,
+      "timeSlot": null,
+      "recommendation": "Vaso extraordinario, recorre el abdomen y el pecho por la línea media anterior. Mar del Yin. Nutre, recibe, sostiene la concepción y el corazón.",
+      "associations": "Mar del Yin. Conexión con la matriz, el centro emocional. Punto del Mar de Energía (CV6 qihai), del Centro del Pecho (CV17 shanzhong)."
+    }
+  ]
+}

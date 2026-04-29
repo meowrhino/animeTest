@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>穴道 — Puntos de acupuntura</title>
+    <meta name="description" content="Visor de los 361 puntos canónicos de acupuntura (estándar OMS) organizados por meridiano." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../shared/styles/tokens.css" />
+    <link rel="stylesheet" href="../../shared/styles/base.css" />
+    <link rel="stylesheet" href="../../shared/styles/components.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-tool="acupuncture">
+    <div class="grain" aria-hidden="true"></div>
+    <a href="../../" class="back-link" aria-label="Volver al portal">← Suite</a>
+
+    <main class="acu">
+      <header class="acu__header">
+        <h1 class="acu__title">
+          <span class="acu__title-cn" aria-hidden="true">穴道</span>
+          <span class="acu__title-text">Puntos de acupuntura</span>
+        </h1>
+        <p class="acu__subtitle"><span data-split>Trescientos sesenta y uno. Cada uno con su nombre, su lugar y su función.</span></p>
+      </header>
+
+      <section class="acu__browser">
+        <div class="acu__filters">
+          <label class="field acu__search-field">
+            <span class="field__label">Buscar</span>
+            <input class="field__input" type="search" id="points-search" placeholder="Por nombre, pinyin, código, indicación…" autocomplete="off" />
+          </label>
+          <p class="acu__browser-meta" id="points-meta">—</p>
+        </div>
+
+        <nav class="acu__meridian-tabs" id="meridian-tabs" role="tablist" aria-label="Filtrar por meridiano">
+          <button class="acu__meridian-tab" data-meridian="ALL" aria-selected="true">Todos</button>
+          <!-- Inyectado: 14 botones -->
+        </nav>
+
+        <ul class="acu__points-list" id="points-list">
+          <!-- Inyectado -->
+        </ul>
+      </section>
+
+      <!-- Modal detalle -->
+      <aside class="acu__detail" id="acu-detail" hidden aria-hidden="true">
+        <div class="acu__detail-backdrop" data-action="close-detail"></div>
+        <article class="acu__detail-card">
+          <button class="acu__detail-close" data-action="close-detail" aria-label="Cerrar">×</button>
+          <header class="acu__detail-header">
+            <p class="acu__detail-code" id="detail-code">—</p>
+            <h3 class="acu__detail-name">
+              <span class="acu__detail-cn" id="detail-cn"></span>
+              <span class="acu__detail-py" id="detail-py"></span>
+            </h3>
+            <p class="acu__detail-spanish" id="detail-spanish"></p>
+            <p class="acu__detail-meridian" id="detail-meridian"></p>
+          </header>
+
+          <section class="acu__detail-block">
+            <h4 class="acu__detail-block-title">Categoría</h4>
+            <p id="detail-category">—</p>
+          </section>
+
+          <section class="acu__detail-block">
+            <h4 class="acu__detail-block-title">Localización</h4>
+            <p id="detail-location">—</p>
+          </section>
+
+          <section class="acu__detail-block">
+            <h4 class="acu__detail-block-title">Indicaciones</h4>
+            <ul class="acu__detail-indications" id="detail-indications"></ul>
+          </section>
+        </article>
+      </aside>
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

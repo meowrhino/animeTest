@@ -162,7 +162,11 @@ export function fillLineSlot(hexagramEl, index, line) {
   if (!slot) return null;
   slot.classList.remove('hexagram__line--empty');
   slot.dataset.yin = line.yin ? '1' : '0';
-  if (line.mutable) slot.dataset.mutable = '1';
+  if (line.mutable) {
+    slot.dataset.mutable = '1';
+  } else {
+    delete slot.dataset.mutable; // evita stale flag si el slot se rellena dos veces
+  }
   slot.innerHTML = '';
   slot.appendChild(createLineSvg(line));
   return slot;

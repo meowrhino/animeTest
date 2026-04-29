@@ -166,21 +166,25 @@ export function createNatalChart({ host, signsData, ascSign, ascDeg, planets, as
   const planetsGroup = el('g', { class: 'chart__planets' });
   root.appendChild(planetsGroup);
 
+  // Cada planeta es un <g> outer (translate fijo) + <g> inner (scale animable).
+  // Separarlos evita que anime.js pise el translate al animar el scale.
   planetNodes.forEach((p) => {
-    const node = el('g', {
+    const outer = el('g', {
       class: 'chart__planet',
       'data-planet': p.key,
       transform: `translate(${p.x}, ${p.y})`,
     });
-    node.appendChild(el('circle', { r: 16, class: 'chart__planet-bg' }));
+    const inner = el('g', { class: 'chart__planet-inner' });
+    inner.appendChild(el('circle', { r: 16, class: 'chart__planet-bg' }));
     const text = el('text', {
       'text-anchor': 'middle',
       'dominant-baseline': 'middle',
       class: 'chart__planet-glyph',
     });
     text.textContent = p.glyph;
-    node.appendChild(text);
-    planetsGroup.appendChild(node);
+    inner.appendChild(text);
+    outer.appendChild(inner);
+    planetsGroup.appendChild(outer);
   });
 
   // ─── Ascendente label ────────────────────────────────
@@ -207,7 +211,9 @@ export function createNatalChart({ host, signsData, ascSign, ascDeg, planets, as
       utils.set([...ringsGroup.children], { opacity: 0 });
       utils.set([...signsGroup.children], { opacity: 0, scale: 0.85 });
       utils.set([...aspectsGroup.children], { opacity: 0 });
-      utils.set([...planetsGroup.children], { opacity: 0, scale: 0.4 });
+      // El scale va en .chart__planet-inner para no pisar el translate del outer
+      utils.set([...planetsGroup.children], { opacity: 0 });
+      utils.set([...planetsGroup.querySelectorAll('.chart__planet-inner')], { scale: 0.4 });
 
       animate(root, {
         opacity: [0, 1],
@@ -242,8 +248,17 @@ export function createNatalChart({ host, signsData, ascSign, ascDeg, planets, as
         });
       }
 
-      animate([...planetsGroup.children], {
+      // Animamos opacity en el outer (no afecta transform) y scale en el inner
+      // (transform-origin del <g> está implícitamente en (0,0) del sistema local del outer)
+      const outers = [...planetsGroup.children];
+      const inners = outers.map((g) => g.querySelector('.chart__planet-inner'));
+      animate(outers, {
         opacity: [0, 1],
+        duration: 700,
+        delay: stagger(60, { start: 2100 }),
+        ease: 'outExpo',
+      });
+      animate(inners, {
         scale: [0.4, 1],
         duration: 700,
         delay: stagger(60, { start: 2100 }),

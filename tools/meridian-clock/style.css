@@ -1,0 +1,262 @@
+/* Reloj de meridianos — acento jade. Standalone tool. */
+
+[data-tool="meridian-clock"] {
+  --accent: var(--jade);
+  --accent-soft: var(--jade-deep);
+}
+
+.clock-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: clamp(2rem, 5vh, 4rem) clamp(1rem, 4vw, 2rem) 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vh, 4rem);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.back-link {
+  position: fixed;
+  top: 1.5rem; left: 1.5rem;
+  z-index: 10;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  transition: color var(--t-fast);
+}
+.back-link:hover { color: var(--accent); }
+
+.clock-page__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.clock-page__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 400;
+}
+
+.clock-page__title-cn {
+  font-family: var(--font-cn);
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  line-height: 1;
+  color: var(--ink);
+  text-shadow:
+    0 1px 0 rgba(26, 26, 26, 0.05),
+    1px 0 0 color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.clock-page__title-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  color: var(--ink-soft);
+}
+
+.clock-page__subtitle {
+  font-style: italic;
+  color: var(--ink-faded);
+  max-width: 42ch;
+}
+
+/* Layout principal: reloj + info actual */
+.clock-page__main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  .clock-page__main { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.meridian-clock {
+  width: clamp(260px, 42vw, 400px);
+  height: clamp(260px, 42vw, 400px);
+  margin: 0 auto;
+  position: relative;
+}
+
+.meridian-clock svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.meridian-clock__sector {
+  fill: none;
+  stroke: rgba(26, 26, 26, 0.12);
+  stroke-width: 0.5;
+  transition: fill var(--t-medium) var(--ease-out-soft);
+}
+
+.meridian-clock__sector.is-current {
+  fill: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.meridian-clock__sector-divider {
+  stroke: rgba(26, 26, 26, 0.1);
+  stroke-width: 0.5;
+}
+
+.meridian-clock__sector-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  fill: var(--ink-faded);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.meridian-clock__sector-label.is-current {
+  fill: var(--accent);
+  font-weight: 700;
+}
+
+.meridian-clock__hand {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+  transition: transform 1s var(--ease-breath); /* aguja con tick suave */
+}
+
+.meridian-clock__center {
+  fill: var(--accent);
+}
+
+.meridian-clock__hour-text {
+  font-family: var(--font-cn);
+  font-size: 24px;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* Panel info actual */
+.clock-page__current {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.clock-page__hour {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-faded);
+  text-transform: uppercase;
+}
+
+.clock-page__meridian {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--ink);
+}
+
+.clock-page__meridian em {
+  font-family: var(--font-cn);
+  font-style: normal;
+  color: var(--accent);
+  font-size: 1.2em;
+  margin-right: 0.4rem;
+}
+
+.clock-page__recommendation {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.clock-page__associations {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-faded);
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+  padding-top: 0.8rem;
+  line-height: 1.5;
+}
+
+/* Lista de las 12 franjas */
+.clock-page__list {
+  border-top: 1px solid rgba(26, 26, 26, 0.1);
+  padding-top: 2rem;
+}
+
+.clock-page__list-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 1.4rem;
+  font-weight: 500;
+}
+
+.clock-page__items {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.8rem;
+}
+
+.clock-item {
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(26, 26, 26, 0.08);
+  background: rgba(255, 252, 245, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition:
+    border-color var(--t-fast),
+    background var(--t-fast),
+    transform var(--t-fast);
+}
+
+.clock-item.is-current {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.clock-item__time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.clock-item__name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.clock-item__name em {
+  font-family: var(--font-cn);
+  font-style: normal;
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+
+.clock-item__hint {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  margin-top: 0.3rem;
+}

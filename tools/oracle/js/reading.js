@@ -47,18 +47,15 @@ export function initReading(state) {
         'Este hexagrama todavía no está en data/iching.json. Añade su entrada usando el binario correspondiente como clave.';
     }
 
-    // Líneas mutables
+    // Líneas mutables. Numerar con la posición real (1..6), no con el orden en que aparecen.
     const mutIdx = mutableIndices(state.lines);
     if (mutIdx.length > 0 && data?.lines) {
       mutBlock.hidden = false;
       mutList.innerHTML = '';
       mutIdx.forEach((idx) => {
         const li = document.createElement('li');
+        li.dataset.lineNum = String(idx + 1); // CSS lo lee con attr() para mostrar el número
         li.textContent = data.lines[idx] ?? `Línea ${idx + 1}`;
-        li.style.setProperty('--line-num', String(idx + 1));
-        // Adjust counter to show actual line position
-        const startVal = mutList.children.length;
-        if (startVal === 0) mutList.style.counterReset = `line-counter ${idx}`;
         mutList.appendChild(li);
       });
     } else {
